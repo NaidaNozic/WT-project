@@ -22,3 +22,28 @@ header{
 .ciklusi{
     padding-left: 30px;
 }
+.predmeti{
+    display: grid;
+    grid-template-columns: repeat(auto-fill,200px);
+}
+.predmeti>div{
+    box-sizing: border-box;
+    border: 1px solid;
+    margin: 10px;
+    padding: 5px;
+}
+.vanAkadGodine{
+    background-color: gray;
+}
+.izborni{
+    background-color: powderblue;
+}
+.predmeti div p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+p{
+    margin: 0px;
+    padding: 0px;
+}
