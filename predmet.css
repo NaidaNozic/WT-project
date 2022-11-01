@@ -1,0 +1,24 @@
+header{
+    display: flex;
+    justify-content: center;
+}
+#meni{
+    display: grid;
+    grid-template-columns: repeat(4,auto);
+    grid-template-rows: repeat(1,auto);
+    column-gap: 80px;
+}
+#meni>ul,li{
+    list-style: none;
+    margin-right: 5px;
+}
+#ri #ee #ae #tk{
+    margin: 0px;
+    padding: 0px;
+}
+#ri li,#ae li, #tk li, #ee li{
+    display: inline;
+}
+.ciklusi{
+    padding-left: 30px;
+}
