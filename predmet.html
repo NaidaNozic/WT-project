@@ -12,11 +12,21 @@
     <header>
         <div id="meni">
 
-        <ul id="ri">
-            <li><a href="#"> Računarstvo i informatika</a></li> <br>
+        <ul id="ri1">
+            <li><a href="#ri"> Računarstvo i informatika</a></li> <br>
         <ul class="ciklusi">
-            <li><a href="#"> RS 1</a></li>
-            <li><a href="#"> RS 2</a></li> <br>
+            <li><a href="#rs1_ri"> RS 1</a></li>
+            <li><a href="#rs2_ri"> RS 2</a></li> <br>
+            <li><a href="#bsc1_ri"> Bsc 1</a></li>
+            <li><a href="#bsc2_ri"> Bsc 2</a></li>
+            <li><a href="#bsc3_ri"> Bsc 3</a></li> <br>
+            <li><a href="#msc1_ri"> Msc 1</a></li>
+            <li><a href="#msc2_ri">Msc 2</a></li>
+        </ul>
+        </ul>
+        <ul id="aie1">
+            <li><a href="#aie"> Elektroenergetika</a></li> <br>
+        <ul class="ciklusi">
             <li><a href="#"> Bsc 1</a></li>
             <li><a href="#"> Bsc 2</a></li>
             <li><a href="#"> Bsc 3</a></li> <br>
@@ -24,17 +34,7 @@
             <li><a href="#">Msc 2</a></li>
         </ul>
         </ul>
-        <ul id="ee">
-            <li><a href="#"> Elektroenergetika</a></li> <br>
-        <ul class="ciklusi">
-            <li><a href="#"> Bsc 1</a></li>
-            <li><a href="#"> Bsc 2</a></li>
-            <li><a href="#"> Bsc 3</a></li> <br>
-            <li><a href="#"> Msc 1</a></li>
-            <li><a href="#">Msc 2</a></li>
-        </ul>
-        </ul>
-        <ul id="ae">
+        <ul id="ae1">
             <li><a href="#"> Automatika i elektronika</a></li> <br>
         <ul class="ciklusi">
             <li><a href="#"> Bsc 1</a></li>
@@ -44,7 +44,7 @@
             <li><a href="#">Msc 2</a></li>
         </ul>
         </ul>
-        <ul id="tk">
+        <ul id="tk1">
             <li><a href="#"> Telekomunikacije</a></li> <br>
         <ul class="ciklusi">
             <li><a href="#"> Bsc 1</a></li>
@@ -60,20 +60,20 @@
     <div id="ri">
         <h2>Računarstvo i informatika</h2>
         <div class="rs_1">
-            <h3>RS 1</h3>
+            <h3 GGid="rs1_ri">RS 1</h3>
             <!--Nalazit će se grid predmeta za ovaj ciklus i godinu-->
             <div class="predmeti">
                 <div><p>FWT</p><p>Frontend web tehnologije</p></div>
                 <div><p>MR1</p><p>Matematika u računarstvu 1</p></div>
                 <div><p>UBP</p><p>Uvod u baze podataka</p></div>
-                <div><p>OIS</p><p>Osnove informacionih sistema</p></div>
+                <div class="izborni"><p>OIS</p><p>Osnove informacionih sistema</p></div>
                 <div><p>RP</p><p>Računarska pismenost</p></div>
                 <div><p>UUP</p><p>Uvod u programiranje</p></div>
 
-                <div><p>VIS</p><p>Vjerovatnoća i statistika</p></div>
+                <div class="izborni"><p>VIS</p><p>Vjerovatnoća i statistika</p></div>
                 <div><p>RAM</p><p>Računarske arhitekture i mreže</p></div>
-                <div><p>RS</p><p>Razvoj softvera</p></div>
-                <div><p>TP</p><p>Tehnike programiranja</p></div>
+                <div class="izborni"><p>RS</p><p>Razvoj softvera</p></div>
+                <div class="izborni"><p>TP</p><p>Tehnike programiranja</p></div>
                 <div><p>MR2</p><p>Matematika u računarstvu 2</p></div>
 
                 <div class="vanAkadGodine"><p>BWT</p><p>Back-end web tehnologije</p></div>
@@ -106,13 +106,13 @@
 
                 <div><p>Back-end web tehnologije</p></div>
                 <div><p>Interakcija čovjek-računar</p></div>
-                <div><p>Skladišta podataka</p></div>
-                <div><p>Web tehnologije</p></div>
-                <div><p>Programski jezici i prevodioci</p></div>
+                <div class="izborni"><p>Skladišta podataka</p></div>
+                <div class="izborni"><p>Web tehnologije</p></div>
+                <div class="izborni"><p>Programski jezici i prevodioci</p></div>
                 <div><p>Testiranje softvera</p></div>
-                <div><p>Algoritmi i strukture podataka</p></div>
+                <div class="izborni"><p>Algoritmi i strukture podataka</p></div>
                 <div><p>Napredni razvoj softvera</p></div>
-                <div><p>Razvoj mobilnih aplikacija</p></div>
+                <div class="izborni"><p>Razvoj mobilnih aplikacija</p></div>
             </div>
         </div>
         <div class="bsc_1">
@@ -124,19 +124,80 @@
             <div><p>Inženjerska fizika 1</p></div>
             <div><p>Linearna algebra i geometrija</p></div>
             <div><p>Osnove elektrotehnike</p></div>
-        </div>
+            <div class="vanAkadGodine"><p>Računarske arhitekture i mreže</p></div>
+            <div class="vanAkadGodine"><p>Razvoj softvera</p></div>
+            <div class="vanAkadGodine"><p>Tehnike programiranja</p></div>
+            <div class="izborni"><p>Algoritmi i strukture podataka</p></div>
+            <div class="izborni"><p>Napredni razvoj softvera</p></div>
+            </div>
         </div>
         <div class="bsc_2">
             <h3>BSc 2</h3>
+
+            <div class="predmeti">
+                <div><p>Uvod u programiranje</p></div>
+                <div><p>Inženjerska matematika 1</p></div>
+                <div><p>Inženjerska fizika 1</p></div>
+                <div><p>Linearna algebra i geometrija</p></div>
+                <div><p>Osnove elektrotehnike</p></div>
+                <div class="vanAkadGodine"><p>Računarske arhitekture i mreže</p></div>
+                <div class="vanAkadGodine"><p>Razvoj softvera</p></div>
+                <div class="vanAkadGodine"><p>Tehnike programiranja</p></div>
+                <div class="izborni"><p>Algoritmi i strukture podataka</p></div>
+                <div class="izborni"><p>Napredni razvoj softvera</p></div>
+                </div>
+            </div>
         </div>
         <div class="bsc_3">
             <h3>BSc 3</h3>
+
+            <div class="predmeti">
+                <div><p>Uvod u programiranje</p></div>
+                <div><p>Inženjerska matematika 1</p></div>
+                <div><p>Inženjerska fizika 1</p></div>
+                <div><p>Linearna algebra i geometrija</p></div>
+                <div><p>Osnove elektrotehnike</p></div>
+                <div class="vanAkadGodine"><p>Računarske arhitekture i mreže</p></div>
+                <div class="vanAkadGodine"><p>Razvoj softvera</p></div>
+                <div class="vanAkadGodine"><p>Tehnike programiranja</p></div>
+                <div class="izborni"><p>Algoritmi i strukture podataka</p></div>
+                <div class="izborni"><p>Napredni razvoj softvera</p></div>
+                </div>
+            </div>
         </div>
         <div class="msc_1">
             <h3>MSc 1</h3>
+
+            <div class="predmeti">
+                <div><p>Uvod u programiranje</p></div>
+                <div><p>Inženjerska matematika 1</p></div>
+                <div><p>Inženjerska fizika 1</p></div>
+                <div><p>Linearna algebra i geometrija</p></div>
+                <div><p>Osnove elektrotehnike</p></div>
+                <div class="vanAkadGodine"><p>Računarske arhitekture i mreže</p></div>
+                <div class="vanAkadGodine"><p>Razvoj softvera</p></div>
+                <div class="vanAkadGodine"><p>Tehnike programiranja</p></div>
+                <div class="izborni"><p>Algoritmi i strukture podataka</p></div>
+                <div class="izborni"><p>Napredni razvoj softvera</p></div>
+                </div>
+            </div>
         </div>
         <div class="msc_2">
             <h3>MSc 2</h3>
+
+            <div class="predmeti">
+                <div><p>Uvod u programiranje</p></div>
+                <div><p>Inženjerska matematika 1</p></div>
+                <div><p>Inženjerska fizika 1</p></div>
+                <div><p>Linearna algebra i geometrija</p></div>
+                <div><p>Osnove elektrotehnike</p></div>
+                <div class="vanAkadGodine"><p>Računarske arhitekture i mreže</p></div>
+                <div class="vanAkadGodine"><p>Razvoj softvera</p></div>
+                <div class="vanAkadGodine"><p>Tehnike programiranja</p></div>
+                <div class="izborni"><p>Algoritmi i strukture podataka</p></div>
+                <div class="izborni"><p>Napredni razvoj softvera</p></div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -144,18 +205,88 @@
         <h2>Elektroenergetika</h2>
         <div class="bsc_1">
             <h3>BSc 1</h3>
+
+            <div class="predmeti">
+                <div><p>Uvod u programiranje</p></div>
+                <div><p>Inženjerska matematika 1</p></div>
+                <div><p>Inženjerska fizika 1</p></div>
+                <div><p>Linearna algebra i geometrija</p></div>
+                <div><p>Osnove elektrotehnike</p></div>
+                <div class="vanAkadGodine"><p>Računarske arhitekture i mreže</p></div>
+                <div class="vanAkadGodine"><p>Razvoj softvera</p></div>
+                <div class="vanAkadGodine"><p>Tehnike programiranja</p></div>
+                <div class="izborni"><p>Algoritmi i strukture podataka</p></div>
+                <div class="izborni"><p>Napredni razvoj softvera</p></div>
+                </div>
+            </div>
         </div>
         <div class="bsc_2">
             <h3>BSc 2</h3>
+
+            <div class="predmeti">
+                <div><p>Uvod u programiranje</p></div>
+                <div><p>Inženjerska matematika 1</p></div>
+                <div><p>Inženjerska fizika 1</p></div>
+                <div><p>Linearna algebra i geometrija</p></div>
+                <div><p>Osnove elektrotehnike</p></div>
+                <div class="vanAkadGodine"><p>Računarske arhitekture i mreže</p></div>
+                <div class="vanAkadGodine"><p>Razvoj softvera</p></div>
+                <div class="vanAkadGodine"><p>Tehnike programiranja</p></div>
+                <div class="izborni"><p>Algoritmi i strukture podataka</p></div>
+                <div class="izborni"><p>Napredni razvoj softvera</p></div>
+                </div>
+            </div>
         </div>
         <div class="bsc_3">
             <h3>BSc 3</h3>
+
+            <div class="predmeti">
+                <div><p>Uvod u programiranje</p></div>
+                <div><p>Inženjerska matematika 1</p></div>
+                <div><p>Inženjerska fizika 1</p></div>
+                <div><p>Linearna algebra i geometrija</p></div>
+                <div><p>Osnove elektrotehnike</p></div>
+                <div class="vanAkadGodine"><p>Računarske arhitekture i mreže</p></div>
+                <div class="vanAkadGodine"><p>Razvoj softvera</p></div>
+                <div class="vanAkadGodine"><p>Tehnike programiranja</p></div>
+                <div class="izborni"><p>Algoritmi i strukture podataka</p></div>
+                <div class="izborni"><p>Napredni razvoj softvera</p></div>
+                </div>
+            </div>
         </div>
         <div class="msc_1">
             <h3>MSc 1</h3>
+
+            <div class="predmeti">
+                <div><p>Uvod u programiranje</p></div>
+                <div><p>Inženjerska matematika 1</p></div>
+                <div><p>Inženjerska fizika 1</p></div>
+                <div><p>Linearna algebra i geometrija</p></div>
+                <div><p>Osnove elektrotehnike</p></div>
+                <div class="vanAkadGodine"><p>Računarske arhitekture i mreže</p></div>
+                <div class="vanAkadGodine"><p>Razvoj softvera</p></div>
+                <div class="vanAkadGodine"><p>Tehnike programiranja</p></div>
+                <div class="izborni"><p>Algoritmi i strukture podataka</p></div>
+                <div class="izborni"><p>Napredni razvoj softvera</p></div>
+                </div>
+            </div>
         </div>
         <div class="msc_2">
             <h3>MSc 2</h3>
+
+            <div class="predmeti">
+                <div><p>Uvod u programiranje</p></div>
+                <div><p>Inženjerska matematika 1</p></div>
+                <div><p>Inženjerska fizika 1</p></div>
+                <div><p>Linearna algebra i geometrija</p></div>
+                <div><p>Osnove elektrotehnike</p></div>
+                <div class="vanAkadGodine"><p>Računarske arhitekture i mreže</p></div>
+                <div class="vanAkadGodine"><p>Razvoj softvera</p></div>
+                <div class="vanAkadGodine"><p>Tehnike programiranja</p></div>
+                <div class="izborni"><p>Algoritmi i strukture podataka</p></div>
+                <div class="izborni"><p>Napredni razvoj softvera</p></div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -163,18 +294,87 @@
         <h2>Automatika i elektronika</h2>
         <div class="bsc_1">
             <h3>BSc 1</h3>
+
+            <div class="predmeti">
+                <div><p>Uvod u programiranje</p></div>
+                <div><p>Inženjerska matematika 1</p></div>
+                <div><p>Inženjerska fizika 1</p></div>
+                <div><p>Linearna algebra i geometrija</p></div>
+                <div><p>Osnove elektrotehnike</p></div>
+                <div class="vanAkadGodine"><p>Računarske arhitekture i mreže</p></div>
+                <div class="vanAkadGodine"><p>Razvoj softvera</p></div>
+                <div class="vanAkadGodine"><p>Tehnike programiranja</p></div>
+                <div class="izborni"><p>Algoritmi i strukture podataka</p></div>
+                <div class="izborni"><p>Napredni razvoj softvera</p></div>
+                </div>
+            </div>
         </div>
         <div class="bsc_2">
             <h3>BSc 2</h3>
+
+            <div class="predmeti">
+                <div><p>Uvod u programiranje</p></div>
+                <div><p>Inženjerska matematika 1</p></div>
+                <div><p>Inženjerska fizika 1</p></div>
+                <div><p>Linearna algebra i geometrija</p></div>
+                <div><p>Osnove elektrotehnike</p></div>
+                <div class="vanAkadGodine"><p>Računarske arhitekture i mreže</p></div>
+                <div class="vanAkadGodine"><p>Razvoj softvera</p></div>
+                <div class="vanAkadGodine"><p>Tehnike programiranja</p></div>
+                <div class="izborni"><p>Algoritmi i strukture podataka</p></div>
+                <div class="izborni"><p>Napredni razvoj softvera</p></div>
+                </div>
+            </div>
         </div>
         <div class="bsc_3">
             <h3>BSc 3</h3>
+
+            <div class="predmeti">
+                <div><p>Uvod u programiranje</p></div>
+                <div><p>Inženjerska matematika 1</p></div>
+                <div><p>Inženjerska fizika 1</p></div>
+                <div><p>Linearna algebra i geometrija</p></div>
+                <div><p>Osnove elektrotehnike</p></div>
+                <div class="vanAkadGodine"><p>Računarske arhitekture i mreže</p></div>
+                <div class="vanAkadGodine"><p>Razvoj softvera</p></div>
+                <div class="vanAkadGodine"><p>Tehnike programiranja</p></div>
+                <div class="izborni"><p>Algoritmi i strukture podataka</p></div>
+                <div class="izborni"><p>Napredni razvoj softvera</p></div>
+                </div>
+            </div>
         </div>
         <div class="msc_1">
             <h3>MSc 1</h3>
+
+            <div class="predmeti">
+                <div><p>Uvod u programiranje</p></div>
+                <div><p>Inženjerska matematika 1</p></div>
+                <div><p>Inženjerska fizika 1</p></div>
+                <div><p>Linearna algebra i geometrija</p></div>
+                <div><p>Osnove elektrotehnike</p></div>
+                <div class="vanAkadGodine"><p>Računarske arhitekture i mreže</p></div>
+                <div class="vanAkadGodine"><p>Razvoj softvera</p></div>
+                <div class="vanAkadGodine"><p>Tehnike programiranja</p></div>
+                <div class="izborni"><p>Algoritmi i strukture podataka</p></div>
+                <div class="izborni"><p>Napredni razvoj softvera</p></div>
+                </div>
+            </div>
         </div>
         <div class="msc_2">
             <h3>MSc 2</h3>
+            <div class="predmeti">
+                <div><p>Uvod u programiranje</p></div>
+                <div><p>Inženjerska matematika 1</p></div>
+                <div><p>Inženjerska fizika 1</p></div>
+                <div><p>Linearna algebra i geometrija</p></div>
+                <div><p>Osnove elektrotehnike</p></div>
+                <div class="vanAkadGodine"><p>Računarske arhitekture i mreže</p></div>
+                <div class="vanAkadGodine"><p>Razvoj softvera</p></div>
+                <div class="vanAkadGodine"><p>Tehnike programiranja</p></div>
+                <div class="izborni"><p>Algoritmi i strukture podataka</p></div>
+                <div class="izborni"><p>Napredni razvoj softvera</p></div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -182,18 +382,88 @@
         <h2>Telekomunikacije</h2>
         <div class="bsc_1">
             <h3>BSc 1</h3>
+
+            <div class="predmeti">
+                <div><p>Uvod u programiranje</p></div>
+                <div><p>Inženjerska matematika 1</p></div>
+                <div><p>Inženjerska fizika 1</p></div>
+                <div><p>Linearna algebra i geometrija</p></div>
+                <div><p>Osnove elektrotehnike</p></div>
+                <div class="vanAkadGodine"><p>Računarske arhitekture i mreže</p></div>
+                <div class="vanAkadGodine"><p>Razvoj softvera</p></div>
+                <div class="vanAkadGodine"><p>Tehnike programiranja</p></div>
+                <div class="izborni"><p>Algoritmi i strukture podataka</p></div>
+                <div class="izborni"><p>Napredni razvoj softvera</p></div>
+                </div>
+            </div>
         </div>
         <div class="bsc_2">
             <h3>BSc 2</h3>
+
+            <div class="predmeti">
+                <div><p>Uvod u programiranje</p></div>
+                <div><p>Inženjerska matematika 1</p></div>
+                <div><p>Inženjerska fizika 1</p></div>
+                <div><p>Linearna algebra i geometrija</p></div>
+                <div><p>Osnove elektrotehnike</p></div>
+                <div class="vanAkadGodine"><p>Računarske arhitekture i mreže</p></div>
+                <div class="vanAkadGodine"><p>Razvoj softvera</p></div>
+                <div class="vanAkadGodine"><p>Tehnike programiranja</p></div>
+                <div class="izborni"><p>Algoritmi i strukture podataka</p></div>
+                <div class="izborni"><p>Napredni razvoj softvera</p></div>
+                </div>
+            </div>
         </div>
         <div class="bsc_3">
             <h3>BSc 3</h3>
+
+            <div class="predmeti">
+                <div><p>Uvod u programiranje</p></div>
+                <div><p>Inženjerska matematika 1</p></div>
+                <div><p>Inženjerska fizika 1</p></div>
+                <div><p>Linearna algebra i geometrija</p></div>
+                <div><p>Osnove elektrotehnike</p></div>
+                <div class="vanAkadGodine"><p>Računarske arhitekture i mreže</p></div>
+                <div class="vanAkadGodine"><p>Razvoj softvera</p></div>
+                <div class="vanAkadGodine"><p>Tehnike programiranja</p></div>
+                <div class="izborni"><p>Algoritmi i strukture podataka</p></div>
+                <div class="izborni"><p>Napredni razvoj softvera</p></div>
+                </div>
+            </div>
         </div>
         <div class="msc_1">
             <h3>MSc 1</h3>
+
+            <div class="predmeti">
+                <div><p>Uvod u programiranje</p></div>
+                <div><p>Inženjerska matematika 1</p></div>
+                <div><p>Inženjerska fizika 1</p></div>
+                <div><p>Linearna algebra i geometrija</p></div>
+                <div><p>Osnove elektrotehnike</p></div>
+                <div class="vanAkadGodine"><p>Računarske arhitekture i mreže</p></div>
+                <div class="vanAkadGodine"><p>Razvoj softvera</p></div>
+                <div class="vanAkadGodine"><p>Tehnike programiranja</p></div>
+                <div class="izborni"><p>Algoritmi i strukture podataka</p></div>
+                <div class="izborni"><p>Napredni razvoj softvera</p></div>
+                </div>
+            </div>
         </div>
         <div class="msc_2">
             <h3>MSc 2</h3>
+
+            <div class="predmeti">
+                <div><p>Uvod u programiranje</p></div>
+                <div><p>Inženjerska matematika 1</p></div>
+                <div><p>Inženjerska fizika 1</p></div>
+                <div><p>Linearna algebra i geometrija</p></div>
+                <div><p>Osnove elektrotehnike</p></div>
+                <div class="vanAkadGodine"><p>Računarske arhitekture i mreže</p></div>
+                <div class="vanAkadGodine"><p>Razvoj softvera</p></div>
+                <div class="vanAkadGodine"><p>Tehnike programiranja</p></div>
+                <div class="izborni"><p>Algoritmi i strukture podataka</p></div>
+                <div class="izborni"><p>Napredni razvoj softvera</p></div>
+                </div>
+            </div>
         </div>
     </div>
     

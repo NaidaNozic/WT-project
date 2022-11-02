@@ -1,8 +1,22 @@
+html {
+    scroll-behavior: smooth;
+   }
+h2{
+    margin-top: 100px;
+    text-align: center;
+}
 header{
     display: flex;
     justify-content: center;
 }
+header + div{
+    margin-top: 150px;
+}
 #meni{
+    background-color: beige;
+    position: fixed;
+    top: 0px;
+    width: 100%;
     display: grid;
     grid-template-columns: repeat(4,auto);
     grid-template-rows: repeat(1,auto);
@@ -12,11 +26,11 @@ header{
     list-style: none;
     margin-right: 5px;
 }
-#ri #ee #ae #tk{
+#ri1 #aie1 #ae1 #tk1{
     margin: 0px;
     padding: 0px;
 }
-#ri li,#ae li, #tk li, #ee li{
+#ri1 li,#aie1 li, #tk1 li, #ae1 li{
     display: inline;
 }
 .ciklusi{
