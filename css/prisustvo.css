@@ -13,4 +13,21 @@ td:nth-last-child(1){
 table{
     border-bottom: 1px solid;
 }
+#unutrasnjaTabela{
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+    width: 100%;
+}
+tr>.lastCelije{
+    width:15px;
+    height:40px;
+}
+.crvena{
+    background-color:#eb5050;
+}
+.zelena{
+    background-color: lightgreen;
+}
+
 
