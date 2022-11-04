@@ -61,3 +61,9 @@ p{
     margin: 0px;
     padding: 0px;
 }
+#ri, #aie, #ee, #tk{
+    scroll-margin-block-start: 120px;
+}
+.podNaslovi{
+    scroll-margin-block-start: 120px;
+}
