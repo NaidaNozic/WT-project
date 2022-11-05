@@ -1,10 +1,9 @@
 html {
     scroll-behavior: smooth;
    }
-h2{
-    margin-top: 100px;
-    text-align: center;
-}
+
+@media screen and (min-width:500px){
+
 header{
     display: flex;
     justify-content: center;
@@ -13,7 +12,7 @@ header + div{
     margin-top: 150px;
 }
 #meni{
-    background-color: beige;
+    background-color: powderblue;
     position: fixed;
     top: 0px;
     width: 100%;
@@ -33,8 +32,50 @@ header + div{
 #ri1 li,#aie1 li, #tk1 li, #ae1 li{
     display: inline;
 }
+ 
 .ciklusi{
     padding-left: 30px;
+}
+
+}
+@media screen and (max-width:500px){
+    header{
+        display: block;
+        position: relative;
+    }
+    header + div{
+        margin-top: 150px;
+    }
+    #meni{
+        background-color: powderblue;
+        position: fixed;
+        top: 0px;
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(4,auto);
+        grid-template-rows: repeat(1,auto);
+        column-gap: 80px;
+    }
+    #meni>ul,li{
+        list-style: none;
+        margin-right: 5px;
+    }
+    #ri1 #aie1 #ae1 #tk1{
+        margin: 0px;
+        padding: 0px;
+        position: absolute;
+    }
+    #ri1 li,#aie1 li, #tk1 li, #ae1 li{
+        display: inline;
+    }     
+    .ciklusi{
+        padding-left: 30px;
+    }
+}
+
+h2{
+    margin-top: 100px;
+    text-align: center;
 }
 .predmeti{
     display: grid;
