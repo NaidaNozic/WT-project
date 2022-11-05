@@ -1,3 +1,6 @@
+*{
+    margin-left: 0px;  
+}
 .content {
     margin-top:auto;
     margin-bottom:auto;
@@ -5,22 +8,18 @@
 }
 html {
     scroll-behavior: smooth;
-   }
-
-@media screen and (min-width:500px){
-
+}
 header{
-    display: flex;
-    justify-content: center;
+    background-color: powderblue;
 }
 header + div{
-    margin-top: 150px;
+    margin: 120px 0px 0px 0px;
 }
 #meni{
-    background-color: powderblue;
     position: fixed;
     top: 0px;
     width: 100%;
+    height: auto;
     display: grid;
     grid-template-columns: repeat(4,auto);
     grid-template-rows: repeat(1,auto);
@@ -31,52 +30,41 @@ header + div{
     margin-right: 5px;
 }
 #ri1 #aie1 #ae1 #tk1{
-    margin: 0px;
-    padding: 0px;
+    margin: 2px;
+    padding-right: 70px;
+    height: 80px;
 }
 #ri1 li,#aie1 li, #tk1 li, #ae1 li{
     display: inline;
 }
- 
-.ciklusi{
-    padding-left: 30px;
-}
 
-}
-@media screen and (max-width:500px){
-    header{
+/*MEDIA QUERY ZA RESPONSIVE WEBSITE*/
+
+@media only screen and (min-width:300px){
+    #ri1,#aie1,#tk1,#ae1{
         display: block;
-        position: relative;
-    }
-    header + div{
-        margin-top: 150px;
+        float:left;
+        margin: 2px;
+        height: 80px;
+        padding-right: 70px;
     }
     #meni{
-        background-color: powderblue;
-        position: fixed;
-        top: 0px;
+        background-color: white;
+        display: inline-block;
         width: 100%;
-        display: grid;
-        grid-template-columns: repeat(4,auto);
-        grid-template-rows: repeat(1,auto);
-        column-gap: 80px;
+        padding-left: 10%;
+        
     }
-    #meni>ul,li{
-        list-style: none;
-        margin-right: 5px;
-    }
-    #ri1 #aie1 #ae1 #tk1{
-        margin: 0px;
-        padding: 0px;
-        position: absolute;
-    }
-    #ri1 li,#aie1 li, #tk1 li, #ae1 li{
-        display: inline;
-    }     
-    .ciklusi{
-        padding-left: 30px;
+    header{
+        background-color: white;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        height: fit-content;
     }
 }
+
+/*GLAVNI DIO STRANICE*/
 
 h2{
     margin-top: 100px;
