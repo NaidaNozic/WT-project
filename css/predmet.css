@@ -1,5 +1,5 @@
 *{
-    margin-left: 0px;  
+    margin: 0px;  
 }
 .content {
     margin-top:auto;
@@ -9,14 +9,7 @@
 html {
     scroll-behavior: smooth;
 }
-header{
-    background-color: powderblue;
-}
-header + div{
-    margin: 120px 0px 0px 0px;
-}
 #meni{
-    position: fixed;
     top: 0px;
     width: 100%;
     height: auto;
@@ -29,11 +22,7 @@ header + div{
     list-style: none;
     margin-right: 5px;
 }
-#ri1 #aie1 #ae1 #tk1{
-    margin: 2px;
-    padding-right: 70px;
-    height: 80px;
-}
+
 #ri1 li,#aie1 li, #tk1 li, #ae1 li{
     display: inline;
 }
@@ -44,23 +33,23 @@ header + div{
     #ri1,#aie1,#tk1,#ae1{
         display: block;
         float:left;
-        margin: 2px;
         height: 80px;
-        padding-right: 70px;
+        padding-right: 5%;
+        padding-left: 5%;
+        margin: 20px;
     }
     #meni{
-        background-color: white;
+        background-color: powderblue;
         display: inline-block;
         width: 100%;
-        padding-left: 10%;
-        
+        position: sticky;
+        box-sizing: border-box;
     }
-    header{
-        background-color: white;
-        display: flex;
-        justify-content: center;
-        width: 100%;
-        height: fit-content;
+}
+
+@media only screen and (max-width:299px){
+    #meni{
+        display: none;
     }
 }
 
@@ -96,8 +85,5 @@ p{
     padding: 0px;
 }
 #ri, #aie, #ee, #tk{
-    scroll-margin-block-start: 120px;
-}
-.podNaslovi{
-    scroll-margin-block-start: 120px;
+    scroll-margin-block-start: 80px;
 }
