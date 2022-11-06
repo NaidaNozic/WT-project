@@ -18,13 +18,16 @@ html {
     grid-template-rows: repeat(1,auto);
     column-gap: 80px;
 }
-#meni>ul,li{
-    list-style: none;
-    margin-right: 5px;
-}
-
 #ri1 li,#aie1 li, #tk1 li, #ae1 li{
     display: inline;
+}
+.ciklusi{
+    margin-left: 30px;
+}
+#ri1 .ciklusi li:nth-child(5)::after, #ri1 .ciklusi li:nth-child(2)::after, #aie1 .ciklusi li:nth-child(3)::after,
+#ae1 .ciklusi li:nth-child(3)::after, #tk1 .ciklusi li:nth-child(3)::after{
+    content: "\A";
+    white-space:pre;
 }
 
 /*MEDIA QUERY ZA RESPONSIVE WEBSITE*/
@@ -34,9 +37,9 @@ html {
         display: block;
         float:left;
         height: 80px;
-        padding-right: 5%;
+        padding-right: 2%;
         padding-left: 5%;
-        margin: 20px;
+        margin: 15px;
     }
     #meni{
         background-color: powderblue;
