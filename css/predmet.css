@@ -1,6 +1,9 @@
 *{
     margin: 0px;  
 }
+#meni{
+    min-width: 300px;
+}
 .content {
     margin-top:auto;
     margin-bottom:auto;
@@ -10,16 +13,14 @@ html {
     scroll-behavior: smooth;
 }
 #meni{
-    top: 0px;
-    width: 100%;
-    height: auto;
     display: grid;
     grid-template-columns: repeat(4,auto);
     grid-template-rows: repeat(1,auto);
     column-gap: 80px;
+    background-color: powderblue;
 }
 #ri1 li,#aie1 li, #tk1 li, #ae1 li{
-    display: inline;
+   display: inline;
 }
 .ciklusi{
     margin-left: 30px;
@@ -29,6 +30,9 @@ html {
     content: "\A";
     white-space:pre;
 }
+.podNaslovi{
+    margin-top: 40px;
+}
 
 /*MEDIA QUERY ZA RESPONSIVE WEBSITE*/
 
@@ -36,18 +40,43 @@ html {
     #ri1,#aie1,#tk1,#ae1{
         display: block;
         float:left;
-        height: 80px;
         padding-right: 2%;
+        height: 80px;
         padding-left: 5%;
         margin: 15px;
     }
     #meni{
-        background-color: powderblue;
-        display: inline-block;
-        width: 100%;
-        position: sticky;
+        top: 0px;
+        width: 100%; 
+        height: auto;
+        position:sticky;
         box-sizing: border-box;
+        display: inline-block;
     }
+}
+@media only screen and (min-width:600px){
+    #ri, #aie, #ee, #tk{
+        scroll-margin-block-start: 220px;
+     }
+     .podNaslovi{
+         scroll-margin-block-start: 220px;
+     }
+}
+@media only screen and (min-width:500px) and (max-width:599px){
+    #ri, #aie, #ee, #tk{
+        scroll-margin-block-start: 350px;
+     }
+     .podNaslovi{
+         scroll-margin-block-start:330px;
+     }
+}
+@media only screen and (min-width:300px) and (max-width:499px){
+    #ri, #aie, #ee, #tk{
+        scroll-margin-block-start: 550px;
+     }
+     .podNaslovi{
+         scroll-margin-block-start:550px;
+     }
 }
 
 @media only screen and (max-width:299px){
@@ -59,7 +88,7 @@ html {
 /*GLAVNI DIO STRANICE*/
 
 h2{
-    margin-top: 100px;
+    margin-top: 80px;
     text-align: center;
 }
 .predmeti{
@@ -86,7 +115,4 @@ h2{
 p{
     margin: 0px;
     padding: 0px;
-}
-#ri, #aie, #ee, #tk{
-    scroll-margin-block-start: 80px;
 }
