@@ -7,10 +7,11 @@ window.onload = function(){
 let CrtanjeTabele = (function(){ 
     
     var iscrtajTabelu = function(divDOMelement,data1){
-        var newContent = document.createElement('h1')
 
         divDOMelement.style.display == "none"
         divDOMelement.style.display = "block"
+
+        if(!provjeraValidnostiPodataka(divDOMelement,data1))return
     
         let tabelaEl = document.createElement("table") 
         divDOMelement.appendChild(tabelaEl) 
@@ -104,6 +105,45 @@ let CrtanjeTabele = (function(){
         return celija
     }
 
+    var provjeraValidnostiPodataka = function(divDOMelement,data){
+        if((data.prisustva.find(o => o.predavanja>data.brojPredavanjaSedmicno || o.vjezbe>data.brojVjezbiSedmicno)!=null) ||
+            data.prisustva.find(o => o.predavanja<0 || o.vjezbe<0)){
+            divDOMelement.textContent="Podaci o prisustvu nisu validni!"
+            return false
+        }
+        //Prisustvo za studenta koji nije u listi studenata
+        pr=data.prisustva.map(o => o.index)
+        for(var i=0;i<pr.length;i++){
+            if(data.studenti.find(o => o.index==pr[i])==null){
+                divDOMelement.textContent="Podaci o prisustvu nisu validni!"
+                return false
+            }
+        }
+
+        ukupanBrSedmica=Math.max.apply(Math, data.prisustva.map(o => o.sedmica))
+
+        for(var i=0;i<data.studenti.length;i++){
+            //Ukoliko postoji dva ili vise studenata sa istim indexom
+            var pommm=data.studenti.filter(o => o.index==data.studenti[i].index)
+            if(pommm.length>1){
+                divDOMelement.textContent="Podaci o prisustvu nisu validni!"
+                    return false
+            }
+            //dva ili vise unosa prisustva za istu sedmicu
+            for(var j=0;j<ukupanBrSedmica;j++){
+                
+                var pomm=data.prisustva.filter(o => o.sedmica==j+1 && o.index==data.studenti[i].index)
+                if(pomm.length>1){
+                    divDOMelement.textContent="Podaci o prisustvu nisu validni!"
+                    return false
+                }
+
+            }
+        }
+
+        return true
+    }
+
     return{
         iscrtajTabelu: iscrtajTabelu
     }
@@ -134,13 +174,13 @@ var data={
         },
         {
         "sedmica": 2,
-        "predavanja": 2,
-        "vjezbe": 0,
+        "predavanja": 1,
+        "vjezbe": 1,
         "index": 12345
         },
         {
         "sedmica": 2,
-        "predavanja": 2,
+        "predavanja": 1,
         "vjezbe": 0,
         "index": 12346
         }
