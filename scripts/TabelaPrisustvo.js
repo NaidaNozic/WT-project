@@ -6,6 +6,18 @@ export let TabelaPrisustvo = function(divDOMelement,data1){
         divDOMelement.style.display = "block"
 
         if(!provjeraValidnostiPodataka(divDOMelement,data1))return
+
+        var naslov=document.createElement("h2")
+        naslov.textContent=data1.predmet
+        divDOMelement.appendChild(naslov)
+
+        var podnaslov1=document.createElement("h3")
+        podnaslov1.textContent="Broj predavanja sedmicno: "+data1.brojPredavanjaSedmicno
+        divDOMelement.appendChild(podnaslov1)
+
+        var podnaslov2=document.createElement("h3")
+        podnaslov2.textContent="Broj vježbi sedmicno: "+data1.brojVjezbiSedmicno
+        divDOMelement.appendChild(podnaslov2)
     
         let tabelaEl = document.createElement("table") 
         divDOMelement.appendChild(tabelaEl) 
