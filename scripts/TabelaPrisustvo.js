@@ -1,3 +1,5 @@
+
+
 export let TabelaPrisustvo = function(divDOMelement,data1){ 
 
     let iscrtajTabelu = function(){
@@ -79,7 +81,20 @@ export let TabelaPrisustvo = function(divDOMelement,data1){
             }
             
         }
+        dodajDugmadi()
+    }
 
+    let dodajDugmadi=function(){
+        var dugmeDesno=document.createElement("button")
+        dugmeDesno.innerHTML='<i class="fa-solid fa-arrow-right"></i>'
+
+        var dugmeLijevo=document.createElement("button")
+        dugmeLijevo.innerHTML='<i class="fa-solid fa-arrow-left"></i>'
+
+        dugmeDesno.style.margin="5px"
+
+        divDOMelement.appendChild(dugmeDesno)
+        divDOMelement.appendChild(dugmeLijevo)
     }
     
     let dodajRed = function(tabela){
