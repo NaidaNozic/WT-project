@@ -1,12 +1,6 @@
-/*kod modula TabelaPrisustvo*/
-window.onload = function(){    
-    CrtanjeTabele.iscrtajTabelu(document.getElementById("divDOMelement"),data)
-}
+export let TabelaPrisustvo = function(divDOMelement,data1){ 
 
-
-let CrtanjeTabele = (function(){ 
-    
-    var iscrtajTabelu = function(divDOMelement,data1){
+    let iscrtajTabelu = function(){
 
         divDOMelement.style.display == "none"
         divDOMelement.style.display = "block"
@@ -20,7 +14,7 @@ let CrtanjeTabele = (function(){
         let prviRed = document.createElement("tr")
 
         let sedmice=data1.prisustva.map(o => o.sedmica)
-        ukupanBrSedmica=Math.max.apply(Math, sedmice)
+        var ukupanBrSedmica=Math.max.apply(Math, sedmice)
 
         var imePrezime=document.createElement("th")
         imePrezime.textContent="Ime i prezime"
@@ -76,20 +70,20 @@ let CrtanjeTabele = (function(){
 
     }
     
-    var dodajRed = function(tabela){
+    let dodajRed = function(tabela){
         var red=document.createElement("tr")
         tabela.appendChild(red)
         return red
     }
 
-    var dodajCeliju = function(red,vrijednost){
+    let dodajCeliju = function(red,vrijednost){
         var celija=document.createElement("td")
         celija.textContent=vrijednost
         red.appendChild(celija)
         return celija
     }
 
-    var dodajZelenuCeliju = function(red,vrijednost){
+    let dodajZelenuCeliju = function(red,vrijednost){
         var celija=document.createElement("td")//.style.backgroundColor="lightgreen"
         celija.textContent=vrijednost
         celija.style.backgroundColor="lightgreen"
@@ -97,7 +91,7 @@ let CrtanjeTabele = (function(){
         return celija
     }
 
-    var dodajCrvenuCeliju = function(red,vrijednost){
+    let dodajCrvenuCeliju = function(red,vrijednost){
         var celija=document.createElement("td")//.style.backgroundColor="#eb5050"
         celija.textContent=vrijednost
         celija.style.backgroundColor="#eb5050"
@@ -105,22 +99,24 @@ let CrtanjeTabele = (function(){
         return celija
     }
 
-    var provjeraValidnostiPodataka = function(divDOMelement,data){
+    let provjeraValidnostiPodataka = function(divDOMelement,data){
         if((data.prisustva.find(o => o.predavanja>data.brojPredavanjaSedmicno || o.vjezbe>data.brojVjezbiSedmicno)!=null) ||
             data.prisustva.find(o => o.predavanja<0 || o.vjezbe<0)){
             divDOMelement.textContent="Podaci o prisustvu nisu validni!"
             return false
         }
         //Prisustvo za studenta koji nije u listi studenata
-        pr=data.prisustva.map(o => o.index)
-        for(var i=0;i<pr.length;i++){
-            if(data.studenti.find(o => o.index==pr[i])==null){
+        for(var i=0;i<data.prisustva.length;i++){
+            if(data.studenti.find(o => o.index==data.prisustva[i].index)==null){
                 divDOMelement.textContent="Podaci o prisustvu nisu validni!"
                 return false
             }
+            if(data.prisustva[i].vjezbe==0 && data.prisustva[i].predavanja==0){
+                //data.prisustva.filter(o => o.)
+            }
         }
 
-        ukupanBrSedmica=Math.max.apply(Math, data.prisustva.map(o => o.sedmica))
+        var ukupanBrSedmica=Math.max.apply(Math, data.prisustva.map(o => o.sedmica))
 
         for(var i=0;i<data.studenti.length;i++){
             //Ukoliko postoji dva ili vise studenata sa istim indexom
@@ -137,55 +133,31 @@ let CrtanjeTabele = (function(){
                     divDOMelement.textContent="Podaci o prisustvu nisu validni!"
                     return false
                 }
-
+                var pipi=data.prisustva.filter((o => o.vjezbe==0 && o.predavanja==0 && o.sedmica==j+1))
+                if(pipi.length==data.studenti.length){
+                    //svi studenti imaju prisustvo nula za trenutnu sedmicu
+                    divDOMelement.textContent="Podaci o prisustvu nisu validni!"
+                    return false
+                }
             }
         }
-
         return true
+    }
+    let sljedecaSedmica = function () {
+    }
+    let prethodnaSedmica = function () {
+    }
+    let testIscrtaj=function(){
+        let ee = document.createElement("h1") 
+        ee.textContent="TESTT2"
+        divDOMelement.appendChild(ee)
     }
 
     return{
-        iscrtajTabelu: iscrtajTabelu
+        iscrtajTabelu: iscrtajTabelu,
+        sljedecaSedmica: sljedecaSedmica,
+        prethodnaSedmica: prethodnaSedmica,
+        testIscrtaj: testIscrtaj
     }
 
-}())
-
-var data={
-    "studenti": [{
-        "ime": "Neko Nekic",
-        "index": 12345
-        },
-        {
-        "ime": "Drugi Neko",
-        "index": 12346
-        }
-        ],
-        "prisustva": [{
-        "sedmica": 1,
-        "predavanja": 2,
-        "vjezbe": 1,
-        "index": 12345
-        },
-        {
-        "sedmica": 1,
-        "predavanja": 2,
-        "vjezbe": 2,
-        "index": 12346
-        },
-        {
-        "sedmica": 2,
-        "predavanja": 1,
-        "vjezbe": 1,
-        "index": 12345
-        },
-        {
-        "sedmica": 2,
-        "predavanja": 1,
-        "vjezbe": 0,
-        "index": 12346
-        }
-        ],
-        "predmet": "Razvoj mobilnih aplikacija",
-        "brojPredavanjaSedmicno": 2,
-        "brojVjezbiSedmicno": 2        
-}
+};
