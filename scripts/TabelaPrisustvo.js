@@ -83,19 +83,6 @@ export let TabelaPrisustvo = function(divDOMelement,data1){
         }
         dodajDugmadi()
     }
-
-    let dodajDugmadi=function(){
-        var dugmeDesno=document.createElement("button")
-        dugmeDesno.innerHTML='<i class="fa-solid fa-arrow-right"></i>'
-
-        var dugmeLijevo=document.createElement("button")
-        dugmeLijevo.innerHTML='<i class="fa-solid fa-arrow-left"></i>'
-
-        dugmeDesno.style.margin="5px"
-
-        divDOMelement.appendChild(dugmeDesno)
-        divDOMelement.appendChild(dugmeLijevo)
-    }
     
     let dodajRed = function(tabela){
         var red=document.createElement("tr")
@@ -170,21 +157,39 @@ export let TabelaPrisustvo = function(divDOMelement,data1){
         }
         return true
     }
+    let trenutnaSedmica;
+
     let sljedecaSedmica = function () {
     }
     let prethodnaSedmica = function () {
+        var testno=document.createElement("h1")
+        testno.textContent="TESTNO"
+        divDOMelement.appendChild(testno)
     }
-    let testIscrtaj=function(){
-        let ee = document.createElement("h1") 
-        ee.textContent="TESTT2"
-        divDOMelement.appendChild(ee)
+    
+    let dodajDugmadi=function(){
+        var dugmeDesno=document.createElement("button")
+        dugmeDesno.type="button"
+        dugmeDesno.ariaLabel="Btn1"
+        dugmeDesno.innerHTML='<i class="fa-solid fa-arrow-right"></i>'
+        dugmeDesno.addEventListener("click",sljedecaSedmica);
+        dugmeDesno.style="height:40px; width:50px;font-size:20px;margin:5px"
+        divDOMelement.appendChild(dugmeDesno)
+
+        var dugmeLijevo=document.createElement("button")
+        dugmeLijevo.type="button"
+        dugmeLijevo.ariaLabel="Btn2"
+        dugmeLijevo.innerHTML='<i class="fa-solid fa-arrow-left"></i>'
+        dugmeLijevo.addEventListener("click",prethodnaSedmica);
+        dugmeLijevo.style="height:40px; width:50px;font-size:20px;margin:5px"
+        divDOMelement.appendChild(dugmeLijevo)
     }
 
     return{
         iscrtajTabelu: iscrtajTabelu,
         sljedecaSedmica: sljedecaSedmica,
         prethodnaSedmica: prethodnaSedmica,
-        testIscrtaj: testIscrtaj
+        dodajDugmadi: dodajDugmadi
     }
 
 };

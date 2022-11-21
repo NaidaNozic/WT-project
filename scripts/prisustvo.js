@@ -43,6 +43,5 @@ window.onload=function(){
         "brojPredavanjaSedmicno": 2,
         "brojVjezbiSedmicno": 2        
 });
-//prisustvo.testIscrtaj();
 prisustvo.iscrtajTabelu();
 }
