@@ -22,7 +22,9 @@ export let TabelaPrisustvo = function(divDOMelement,data1){
         divDOMelement.appendChild(podnaslov2)
     
         let tabelaEl = document.createElement("table") 
+        tabelaEl.id="MainTable"
         divDOMelement.appendChild(tabelaEl) 
+        tabela=tabelaEl
 
         //Kreiranje prvog reda
         let prviRed = document.createElement("tr")
@@ -157,16 +159,94 @@ export let TabelaPrisustvo = function(divDOMelement,data1){
         }
         return true
     }
-    let trenutnaSedmica;
-
+    let trenutnaSedmica=Math.max.apply(Math,data1.prisustva.map(o => o.sedmica));
+    let tabela;
     let sljedecaSedmica = function () {
     }
     let prethodnaSedmica = function () {
-        var testno=document.createElement("h1")
-        testno.textContent="TESTNO"
-        divDOMelement.appendChild(testno)
+        var k=trenutnaSedmica
+        if(k==1)return
+        var table = tabela;
+        /*Brisem sve celije kolone trenutne sedmice*/
+        for (var i = 1, row; i<=table.rows.length, row = table.rows[i]; i++){
+            var l=1
+            if(row.cells.length!=data1.brojPredavanjaSedmicno+data1.brojVjezbiSedmicno){
+                while(l<=data1.brojPredavanjaSedmicno+data1.brojVjezbiSedmicno){
+                    row.deleteCell(1+k)
+                    l++
+                }
+            }else{
+                while(l<=data1.brojPredavanjaSedmicno+data1.brojVjezbiSedmicno){
+                    row.deleteCell(0)
+                    l++
+                }
+            }
+        }
+        table.rows[0].cells[1+k].colSpan="1"
+        /*Dodajem nove celije samo sa postotcima*/
+        var p=0
+        for(var i=1, rows; i<=table.rows.length, row=table.rows[i]; i+=2){
+            var newCell=row.insertCell(1+k)
+            newCell.rowSpan="2"
+            var pom1=data1.prisustva.find(o => o.index==data1.studenti[p].index && o.sedmica==trenutnaSedmica)
+            var newText = document.createTextNode((pom1.predavanja+pom1.vjezbe)/(
+                                                  data1.brojPredavanjaSedmicno+data1.brojVjezbiSedmicno)*100+"%")
+            newCell.appendChild(newText);
+            p++
+        }
+        trenutnaSedmica--
+        prikaziDetaljeSedmice()
     }
-    
+
+    let prikaziDetaljeSedmice=function(){
+        tabela.rows[0].cells[1+trenutnaSedmica].colSpan=data1.brojPredavanjaSedmicno+data1.brojVjezbiSedmicno
+        var brojStudenata=0
+        var pom1
+
+        for(var j=1;j<tabela.rows.length;j++){
+
+           if((j)%2!=0) {
+            tabela.rows[j].deleteCell(1+trenutnaSedmica)
+            brojStudenata++
+           }
+
+           for(var k=0;k<data1.brojPredavanjaSedmicno;k++){
+            if((j)%2!=0){
+                var celija=tabela.rows[j].insertCell(1+trenutnaSedmica+k)
+                    celija.textContent="P "+(k+1)
+                    celija.style.height="30px"
+            }else{
+
+                var pom2=data1.prisustva.filter(o => o.index==data1.studenti[brojStudenata-1].index)
+                pom1=pom2.find(o => o.sedmica==trenutnaSedmica)
+
+                if(pom1.predavanja>=k+1){
+                      tabela.rows[j].insertCell(k).style.backgroundColor="lightgreen"
+                }else tabela.rows[j].insertCell(k).style.backgroundColor="#eb5050"
+            }
+           }
+
+           for(var k=0;k<data1.brojVjezbiSedmicno;k++){
+            if((j)%2!=0){
+                var celija=tabela.rows[j].insertCell(1+trenutnaSedmica+data1.brojPredavanjaSedmicno+k)
+                    celija.textContent="V "+(k+1)
+                    celija.style.height="30px"
+            }else{
+                if(pom1.vjezbe>=k+1){
+                    var celija=tabela.rows[j].insertCell(k+data1.brojPredavanjaSedmicno)
+                    celija.style.backgroundColor="lightgreen"  
+                    celija.style.height="30px"
+                } 
+                else{
+                    var celija=tabela.rows[j].insertCell(k+data1.brojPredavanjaSedmicno)
+                    celija.style.backgroundColor="#eb5050"
+                    celija.style.height="30px"
+                }
+            }
+           }
+        }
+
+    }
     let dodajDugmadi=function(){
         var dugmeDesno=document.createElement("button")
         dugmeDesno.type="button"
@@ -187,9 +267,12 @@ export let TabelaPrisustvo = function(divDOMelement,data1){
 
     return{
         iscrtajTabelu: iscrtajTabelu,
+        trenutnaSedmica: trenutnaSedmica,
+        tabela: tabela,
         sljedecaSedmica: sljedecaSedmica,
         prethodnaSedmica: prethodnaSedmica,
-        dodajDugmadi: dodajDugmadi
+        dodajDugmadi: dodajDugmadi,
+        prikaziDetaljeSedmice: prikaziDetaljeSedmice
     }
 
 };
