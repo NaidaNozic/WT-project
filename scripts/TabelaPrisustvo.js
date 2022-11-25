@@ -161,8 +161,42 @@ export let TabelaPrisustvo = function(divDOMelement,data1){
     }
     let trenutnaSedmica=Math.max.apply(Math,data1.prisustva.map(o => o.sedmica));
     let tabela;
+
     let sljedecaSedmica = function () {
+        var k=trenutnaSedmica
+        if(k==Math.max.apply(Math,data1.prisustva.map(o => o.sedmica)))return 
+        var table = tabela;
+        /*Brisem sve celije kolone trenutne sedmice*/
+        for (var i = 1, row; i<=table.rows.length, row = table.rows[i]; i++){
+            var l=1
+            if(row.cells.length!=data1.brojPredavanjaSedmicno+data1.brojVjezbiSedmicno){
+                while(l<=data1.brojPredavanjaSedmicno+data1.brojVjezbiSedmicno){
+                    row.deleteCell(1+k)
+                    l++
+                }
+            }else{
+                while(l<=data1.brojPredavanjaSedmicno+data1.brojVjezbiSedmicno){
+                    row.deleteCell(0)
+                    l++
+                }
+            }
+        }
+        table.rows[0].cells[1+k].colSpan="1"
+        /*Dodajem nove celije samo sa postotcima*/
+        var p=0
+        for(var i=1, rows; i<=table.rows.length, row=table.rows[i]; i+=2){
+            var newCell=row.insertCell(1+k)
+            newCell.rowSpan="2"
+            var pom1=data1.prisustva.find(o => o.index==data1.studenti[p].index && o.sedmica==trenutnaSedmica)
+            var newText = document.createTextNode((pom1.predavanja+pom1.vjezbe)/(
+                                                  data1.brojPredavanjaSedmicno+data1.brojVjezbiSedmicno)*100+"%")
+            newCell.appendChild(newText);
+            p++
+        }
+        trenutnaSedmica++
+        prikaziDetaljeSedmice()
     }
+
     let prethodnaSedmica = function () {
         var k=trenutnaSedmica
         if(k==1)return
