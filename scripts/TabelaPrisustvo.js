@@ -62,10 +62,27 @@ export let TabelaPrisustvo = function(divDOMelement,data1){
                 //const newValues = values.flatMap((v) => [v *v, v*v*v, v+1]); 
                 var pom1=sedmiceZaTrenutnogStudenta.find(s => s.sedmica==j+1)
 
-                if(j!=ukupanBrSedmica-1)
+                if(pom1==null){
+                    if(j!=ukupanBrSedmica-1)dodajCeliju(red,"").rowSpan="2"
+                    else{
+                        for(var k=0;k<data1.brojPredavanjaSedmicno;k++){
+                            dodajCeliju(red,"P "+(k+1)).style.height="30px"
+                        }
+                       
+                        for(var k=0;k<data1.brojVjezbiSedmicno;k++){
+                            dodajCeliju(red,"V "+(k+1)).style.height="30px"
+                        }
+                        var c=dodajCeliju(red1,"")
+                        c.colSpan=data1.brojPredavanjaSedmicno+data1.brojVjezbiSedmicno
+                        c.style.height="30px"
+                    }
+                }else{
+
+                if(j!=ukupanBrSedmica-1){
                 dodajCeliju(red,(pom1.predavanja+pom1.vjezbe)/(
                                  data1.brojPredavanjaSedmicno+data1.brojVjezbiSedmicno
                                  )*100+"%").rowSpan="2"
+                }
                 else{
                     for(var k=0;k<data1.brojPredavanjaSedmicno;k++){
                         dodajCeliju(red,"P "+(k+1)).style.height="30px"
@@ -79,6 +96,7 @@ export let TabelaPrisustvo = function(divDOMelement,data1){
                         if(pom1.vjezbe>=k+1)dodajZelenuCeliju(red1,"").style.height="30px"
                         else dodajCrvenuCeliju(red1,"").style.height="30px"
                     }
+                }
                 }
             }
             
@@ -127,9 +145,6 @@ export let TabelaPrisustvo = function(divDOMelement,data1){
                 divDOMelement.textContent="Podaci o prisustvu nisu validni!"
                 return false
             }
-            if(data.prisustva[i].vjezbe==0 && data.prisustva[i].predavanja==0){
-                //data.prisustva.filter(o => o.)
-            }
         }
 
         var ukupanBrSedmica=Math.max.apply(Math, data.prisustva.map(o => o.sedmica))
@@ -141,24 +156,24 @@ export let TabelaPrisustvo = function(divDOMelement,data1){
                 divDOMelement.textContent="Podaci o prisustvu nisu validni!"
                     return false
             }
-            //dva ili vise unosa prisustva za istu sedmicu
+    
             for(var j=0;j<ukupanBrSedmica;j++){
-                
+
+                //Za trenutnu sedmicu nema nikako unesenog prisustva za nijednost studenta
+                var pipi=data.prisustva.filter((o =>o.sedmica==j+1))
+                if((pipi==null || (pipi!=null && pipi.length==0)) && j+1!=1 && j+1!=ukupanBrSedmica){
+                    var pipi1=data.prisustva.filter((o =>o.sedmica==j))
+                    var pipi2=data.prisustva.filter((o =>o.sedmica==j+2))
+                    if(pipi1!=null &&pipi1.length>0 && pipi2!=null && pipi2.length>0){
+                        divDOMelement.textContent="Podaci o prisustvu nisu validni!"
+                        return false
+                    }
+                }
+                //dva ili vise unosa prisustva za istu sedmicu
                 var pomm=data.prisustva.filter(o => o.sedmica==j+1 && o.index==data.studenti[i].index)
                 if(pomm.length>1){
                     divDOMelement.textContent="Podaci o prisustvu nisu validni!"
                     return false
-                }
-                var pipi=data.prisustva.filter((o => o.vjezbe==0 && o.predavanja==0 && o.sedmica==j+1))
-                if(pipi.length==data.studenti.length && j+1!=1 && j+1!=ukupanBrSedmica){
-                    //svi studenti imaju prisustvo nula za trenutnu sedmicu
-                    //provjeriti da li sedmica prije i sedmica poslije imaju barem jedno uneseno prisustvo
-                    var pipi1=data.prisustva.filter((o => (o.vjezbe!=0 || o.predavanja!=0) && o.sedmica==j))
-                    var pipi2=data.prisustva.filter((o => (o.vjezbe!=0 || o.predavanja!=0) && o.sedmica==j+2))
-                    if(pipi1!=null && pipi2!=null){
-                    divDOMelement.textContent="Podaci o prisustvu nisu validni!"
-                    return false
-                    }
                 }
             }
         }
@@ -176,10 +191,15 @@ export let TabelaPrisustvo = function(divDOMelement,data1){
         for (var i = 1, row; i<=table.rows.length, row = table.rows[i]; i++){
             var l=1
             if(row.cells.length!=data1.brojPredavanjaSedmicno+data1.brojVjezbiSedmicno){
+                if(row.cells.length==1){
+                    row.deleteCell(0)
+                }
+                else{
                 while(l<=data1.brojPredavanjaSedmicno+data1.brojVjezbiSedmicno){
                     row.deleteCell(1+k)
                     l++
                 }
+            }
             }else{
                 while(l<=data1.brojPredavanjaSedmicno+data1.brojVjezbiSedmicno){
                     row.deleteCell(0)
@@ -194,9 +214,15 @@ export let TabelaPrisustvo = function(divDOMelement,data1){
             var newCell=row.insertCell(1+k)
             newCell.rowSpan="2"
             var pom1=data1.prisustva.find(o => o.index==data1.studenti[p].index && o.sedmica==trenutnaSedmica)
+            if(pom1==null || (pom1!=null && pom1.length==0)){
+                var newText=document.createTextNode("")
+                newCell.appendChild(newText)
+            }
+            else{
             var newText = document.createTextNode((pom1.predavanja+pom1.vjezbe)/(
                                                   data1.brojPredavanjaSedmicno+data1.brojVjezbiSedmicno)*100+"%")
             newCell.appendChild(newText);
+            }
             p++
         }
         trenutnaSedmica++
@@ -211,10 +237,16 @@ export let TabelaPrisustvo = function(divDOMelement,data1){
         for (var i = 1, row; i<=table.rows.length, row = table.rows[i]; i++){
             var l=1
             if(row.cells.length!=data1.brojPredavanjaSedmicno+data1.brojVjezbiSedmicno){
+                if(row.cells.length==1){
+                    row.deleteCell(0)
+                }
+                else
+                {
                 while(l<=data1.brojPredavanjaSedmicno+data1.brojVjezbiSedmicno){
                     row.deleteCell(1+k)
                     l++
                 }
+            }
             }else{
                 while(l<=data1.brojPredavanjaSedmicno+data1.brojVjezbiSedmicno){
                     row.deleteCell(0)
@@ -229,9 +261,14 @@ export let TabelaPrisustvo = function(divDOMelement,data1){
             var newCell=row.insertCell(1+k)
             newCell.rowSpan="2"
             var pom1=data1.prisustva.find(o => o.index==data1.studenti[p].index && o.sedmica==trenutnaSedmica)
+            if(pom1==null || (pom1!=null && pom1.length==0)){
+                var newText=document.createTextNode("")
+                newCell.appendChild(newText)
+            }else{
             var newText = document.createTextNode((pom1.predavanja+pom1.vjezbe)/(
                                                   data1.brojPredavanjaSedmicno+data1.brojVjezbiSedmicno)*100+"%")
             newCell.appendChild(newText);
+            }
             p++
         }
         trenutnaSedmica--
@@ -260,9 +297,17 @@ export let TabelaPrisustvo = function(divDOMelement,data1){
                 var pom2=data1.prisustva.filter(o => o.index==data1.studenti[brojStudenata-1].index)
                 pom1=pom2.find(o => o.sedmica==trenutnaSedmica)
 
-                if(pom1.predavanja>=k+1){
+                if(pom1==null || (pom1!=null && pom1.length==0)){
+                    var c1=tabela.rows[j].insertCell(k)
+                    c1.colSpan=data1.brojPredavanjaSedmicno+data1.brojVjezbiSedmicno
+                    c1.style.height="30px"
+                    break
+                }
+                else{
+                    if(pom1.predavanja>=k+1){
                       tabela.rows[j].insertCell(k).style.backgroundColor="lightgreen"
-                }else tabela.rows[j].insertCell(k).style.backgroundColor="#eb5050"
+                    }else tabela.rows[j].insertCell(k).style.backgroundColor="#eb5050"
+                }
             }
            }
 
@@ -272,6 +317,10 @@ export let TabelaPrisustvo = function(divDOMelement,data1){
                     celija.textContent="V "+(k+1)
                     celija.style.height="30px"
             }else{
+                if(pom1==null || (pom1!=null && pom1.length==0)){
+                    break
+                }else{
+
                 if(pom1.vjezbe>=k+1){
                     var celija=tabela.rows[j].insertCell(k+data1.brojPredavanjaSedmicno)
                     celija.style.backgroundColor="lightgreen"  
@@ -281,6 +330,8 @@ export let TabelaPrisustvo = function(divDOMelement,data1){
                     var celija=tabela.rows[j].insertCell(k+data1.brojPredavanjaSedmicno)
                     celija.style.backgroundColor="#eb5050"
                     celija.style.height="30px"
+                }
+
                 }
             }
            }

@@ -57,7 +57,7 @@ window.onload=function(){
         {
         "sedmica": 3,
         "predavanja": 0,
-        "vjezbe": 0,
+        "vjezbe": 2,
         "index": 12345
         },
         {
