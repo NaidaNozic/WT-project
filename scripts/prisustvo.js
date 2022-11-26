@@ -38,8 +38,8 @@ window.onload=function(){
             },
         {
         "sedmica": 2,
-        "predavanja": 2,
-        "vjezbe": 1,
+        "predavanja": 0,
+        "vjezbe": 0,
         "index": 12345
         },
         {
@@ -57,19 +57,38 @@ window.onload=function(){
         {
         "sedmica": 3,
         "predavanja": 0,
-        "vjezbe": 1,
+        "vjezbe": 0,
         "index": 12345
-        },{
-            "sedmica": 3,
-            "predavanja": 2,
+        },
+        {
+        "sedmica": 3,
+        "predavanja": 2,
+        "vjezbe": 0,
+        "index": 12346
+        },
+        {
+        "sedmica": 3,
+        "predavanja": 0,
+        "vjezbe": 0,
+        "index": 12347
+        },
+        {
+            "sedmica": 4,
+            "predavanja": 0,
             "vjezbe": 1,
+            "index": 12345
+            },
+            {
+            "sedmica": 4,
+            "predavanja": 0,
+            "vjezbe": 0,
             "index": 12346
             },
             {
-                "sedmica": 3,
-                "predavanja": 0,
-                "vjezbe": 1,
-                "index": 12347
+            "sedmica": 4,
+            "predavanja": 0,
+            "vjezbe": 0,
+            "index": 12347
             }
         ],
         "predmet": "Razvoj mobilnih aplikacija",

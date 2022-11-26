@@ -150,15 +150,21 @@ export let TabelaPrisustvo = function(divDOMelement,data1){
                     return false
                 }
                 var pipi=data.prisustva.filter((o => o.vjezbe==0 && o.predavanja==0 && o.sedmica==j+1))
-                if(pipi.length==data.studenti.length){
+                if(pipi.length==data.studenti.length && j+1!=1 && j+1!=ukupanBrSedmica){
                     //svi studenti imaju prisustvo nula za trenutnu sedmicu
+                    //provjeriti da li sedmica prije i sedmica poslije imaju barem jedno uneseno prisustvo
+                    var pipi1=data.prisustva.filter((o => (o.vjezbe!=0 || o.predavanja!=0) && o.sedmica==j))
+                    var pipi2=data.prisustva.filter((o => (o.vjezbe!=0 || o.predavanja!=0) && o.sedmica==j+2))
+                    if(pipi1!=null && pipi2!=null){
                     divDOMelement.textContent="Podaci o prisustvu nisu validni!"
                     return false
+                    }
                 }
             }
         }
         return true
     }
+
     let trenutnaSedmica=Math.max.apply(Math,data1.prisustva.map(o => o.sedmica));
     let tabela;
 
