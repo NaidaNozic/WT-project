@@ -1,6 +1,6 @@
 
 
-export let TabelaPrisustvo = function(divDOMelement,data1){ 
+/*export */let TabelaPrisustvo = function(divDOMelement,data1){ 
 
     let iscrtajTabelu = function(){
 

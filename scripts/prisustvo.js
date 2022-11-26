@@ -1,4 +1,4 @@
-import {TabelaPrisustvo} from '../scripts/TabelaPrisustvo.js'
+//import {TabelaPrisustvo} from '../scripts/TabelaPrisustvo.js'
 
 window.onload=function(){
     let div = document.getElementById("divDOMelement");
