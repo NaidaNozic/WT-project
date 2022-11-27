@@ -1,10 +1,11 @@
 
 
-/*export */let TabelaPrisustvo = function(divDOMelement,data1){ 
+let TabelaPrisustvo = function(divDOMelement,data1){ 
 
     let iscrtajTabelu = function(){
 
-        divDOMelement.style.display == "none"
+        divDOMelement.innerHTML=""
+       // divDOMelement.style.display == "none"
         divDOMelement.style.display = "block"
 
         if(!provjeraValidnostiPodataka(divDOMelement,data1))return
