@@ -8,11 +8,12 @@ dugme.onclick = function(event){
     obj.password= objectPassword.value
     
     posaljiPodatke(obj, function(err,data){
-        console.log("PRIJAVA.JS")
+
         if(err != null){
             window.alert(err)
         }else{
-            window.alert("Uspješno su poslani podaci!"+data)
+            json=JSON.parse(data)
+            window.alert(json.poruka)
         }
     })
 

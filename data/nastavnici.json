@@ -1,8 +1,8 @@
 [
     {
     "nastavnik": {
-    "username": "USERNAME",
-    "password_hash": "PASSWORDHASH"
+    "username": "Naida",
+    "password_hash": "123"
     },
     "predmeti": [
     "PREDMET1",

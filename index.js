@@ -1,10 +1,17 @@
 const express = require('express');
+const session = require("express-session");
 const bodyParser = require('body-parser');
 const fs = require('fs');
 const app = express();
 
+app.use(session({
+    secret: 'ovdje ide username nastavnika',
+    resave: true,
+    saveUninitialized: true
+    }))
+    
 const path = require('path')
-app.use(bodyParser.json()) //OVO ČUDO MI JE FALILO!!!!
+app.use(bodyParser.json())
 
 //_dirname allows us to get the root directory of our project
 //u slucaju da ne moze naci neki file, onda ubacuje "/css, /html, /scripts" u put putanje
@@ -26,15 +33,21 @@ app.get('/login',(req,res) => {
     res.sendFile(path.join(__dirname,'public','html','prijava.html'));
 })
 
-app.post('/login/1', (req, res) => { 
-    let jsonObj=req.body
-    res.json([{
-        username: req.body.username,
-        password: req.body.password
-    }]) 
-    console.log(jsonObj)
-    res.status(200)
-   // res.send("NESTO")
+app.post('/login', (req, res) => { 
+    var jsonObj=req.body
+    //provjera da li postoji taj korisnik
+    fs.readFile(path.join(__dirname,'data','nastavnici.json'), (err, data) => {
+        if (err) throw err
+        var nastavnici = JSON.parse(data)
+
+        var currentNastavnik=nastavnici.find(element => element.nastavnik.username == jsonObj.username 
+                                                        && element.nastavnik.password_hash==jsonObj.password)                              
+        if(currentNastavnik!=null){
+            res.end(JSON.stringify({poruka: 'Uspješna prijava'}))
+        }else{
+            res.end(JSON.stringify({poruka: 'Neuspješna prijava'}))
+        }
+    })
  })  
 
 app.use(express.static(path.join(__dirname, 'public')))

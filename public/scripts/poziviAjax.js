@@ -1,5 +1,4 @@
 let posaljiPodatke= function(objekat,funckija){
-    console.log("AJAX")
         var ajax = new XMLHttpRequest();
 
         ajax.onreadystatechange = function() {
@@ -8,10 +7,10 @@ let posaljiPodatke= function(objekat,funckija){
             }
             else if(ajax.readyState == 4){
                 //desio se neki error
-                funckija(JSON.parse(ajax.response).data, null)
+                funckija(ajax.statusText,null)
             }
         }
-        ajax.open("POST", "http://localhost:3000/login/1", true)
+        ajax.open("POST", "http://localhost:3000/login", true)
         ajax.setRequestHeader("Content-Type", "application/json")
         forSend=JSON.stringify(objekat)
         ajax.send(forSend)
