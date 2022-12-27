@@ -35,8 +35,18 @@ app.get('/predmeti.html', (req, res) => {
     res.render("predmeti",{predmetiLista:req.session.predmeti});
 });
 
-app.get('/prijava.html',(req,res) => {
+app.get('/prijava.html',(req, res) => {
     res.sendFile(path.join(__dirname,'public','html','prijava.html'));
+})
+
+app.get('/predmet/:naziv', (req, res) => {
+    var jsonObj=JSON.parse(JSON.stringify(req.body))
+    console.log("USPJELO EHEHHE")
+    /*fs.readFile(path.join(__dirname,'data','prisustva.json'), (err, data) => {
+        if (err) throw err
+        var prisustva = JSON.parse(data)
+        //prisustva.find(element => element.predmet==)
+    })*/
 })
 
 app.post('/login', (req, res) => { 

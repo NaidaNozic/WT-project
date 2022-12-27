@@ -3,8 +3,9 @@ head
 body
     button#dugme Logout
     ul
-        for p in predmetiLista
-            li= p
+        for p,i in predmetiLista
+            li(id= 'id' + i)
+              a(href='#')= p
 
     h1 Uspjesno ste se prijavili
 

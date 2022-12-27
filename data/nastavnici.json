@@ -5,8 +5,8 @@
     "password_hash": "123"
     },
     "predmeti": [
-    "PREDMET1",
-    "PREDMET2",
+    "Razvoj mobilnih aplikacija",
+    "Osnove informacionih istrazivanja",
     "PREDMET3"
     ]
     },
@@ -16,7 +16,7 @@
     "password_hash": "123"
     },
     "predmeti": [
-    "PREDMET1"
+    "Web tehnologije"
     ]
     }
 ]
