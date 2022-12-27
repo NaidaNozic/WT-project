@@ -18,9 +18,10 @@ const PoziviAjax = (()=>{
         }
         ajax.open("POST", "http://localhost:3000/login", true)
         ajax.setRequestHeader("Content-Type", "application/json")
-        var objekat = new Object()
-        objekat.username = username
-        objekat.password= password
+        var objekat = {
+            "username":username,
+            "password":password
+        }
         forSend=JSON.stringify(objekat)
         ajax.send(forSend)
     }

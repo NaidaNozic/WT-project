@@ -12,9 +12,3 @@ var dugme=document.getElementById("dugme")
             }
         })
     }
-
-
-    var meni=document.getElementById('meni')
-    var testni = document.createElement("h2")
-    testni.textContent="TESTNO"
-    meni.appendChild(testni)

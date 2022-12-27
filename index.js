@@ -4,15 +4,16 @@ const bodyParser = require('body-parser');
 const fs = require('fs');
 const app = express()
 const path = require('path')
+app.use(bodyParser.json())
 
-//app.set("view engine", "pug");
-//app.set("views", path.join(__dirname, "views"))
+app.set("view engine", "pug");
+app.set("views", path.join(__dirname, "views"))
+
 app.use(session({
     secret: 'neka tajna sifra',
     resave: true,
     saveUninitialized: true
     }))
-app.use(bodyParser.json())
 
 //_dirname allows us to get the root directory of our project
 //u slucaju da ne moze naci neki file, onda ubacuje "/css, /html, /scripts" u put putanje
@@ -31,28 +32,29 @@ app.get('/predmet.html', (req, res) => {
 });
 
 app.get('/predmeti.html', (req, res) => {
-    res.sendFile(path.join(__dirname,'public','html','predmeti.html'));
+    res.render("predmeti",{predmetiLista:req.session.predmeti});
 });
 
 app.get('/prijava.html',(req,res) => {
     res.sendFile(path.join(__dirname,'public','html','prijava.html'));
 })
 
-app.post('/login', (req, res, next) => { 
-    var jsonObj=req.body
+app.post('/login', (req, res) => { 
+    var jsonObj=JSON.parse(JSON.stringify(req.body))
     //provjera da li postoji taj korisnik
     fs.readFile(path.join(__dirname,'data','nastavnici.json'), (err, data) => {
         if (err) throw err
         var nastavnici = JSON.parse(data)
 
         var currentNastavnik=nastavnici.find(element => element.nastavnik.username == jsonObj.username 
-                                                        && element.nastavnik.password_hash==jsonObj.password)                              
+                                                        && element.nastavnik.password_hash==jsonObj.password)                           
         if(currentNastavnik!=null){
             //u sesiju upisujem username i listu predmeta na kojima je nastavnik
             req.session.username=currentNastavnik.nastavnik.username
             req.session.predmeti=currentNastavnik.predmeti
             res.end(JSON.stringify({poruka: 'Uspješna prijava' }))
         }else{
+            console.log("NIJE GA NASAO")
             res.end(JSON.stringify({poruka: 'Neuspješna prijava'}))
         }
     })

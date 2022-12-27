@@ -19,6 +19,7 @@
   "homepage": "https://bitbucket.org/naidanozic/wt22p18836#readme",
   "dependencies": {
     "express": "^4.18.2",
-    "express-session": "^1.17.3"
+    "express-session": "^1.17.3",
+    "pug": "^3.0.2"
   }
 }
