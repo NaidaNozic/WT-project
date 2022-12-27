@@ -1,52 +1,51 @@
-let posaljiPodatke = function(objekat,funckija){
+const PoziviAjax = (()=>{
+    //fnCallback u svim metodama se poziva kada stigne odgovor sa servera putem Ajax-a
+    // svaki callback kao parametre ima error i data, error je null ako je status 200 i data je tijelo odgovora
+    // ako postoji greška poruka se prosljeđuje u error parametar callback-a, a data je tada null
+    function impl_getPredmet(naziv,fnCallback){
+    }
+    function impl_postLogin(username,password,fnCallback){
         var ajax = new XMLHttpRequest()
 
         ajax.onreadystatechange = function() {
             if (ajax.readyState == 4 && ajax.status == 200){
-                funckija(null,ajax.response)
+                fnCallback(null,ajax.response)
             }
             else if(ajax.readyState == 4){
                 //desio se neki error
-                funckija(ajax.statusText,null)
+                fnCallback(ajax.statusText,null)
             }
         }
         ajax.open("POST", "http://localhost:3000/login", true)
         ajax.setRequestHeader("Content-Type", "application/json")
+        var objekat = new Object()
+        objekat.username = username
+        objekat.password= password
         forSend=JSON.stringify(objekat)
         ajax.send(forSend)
-}
-
-let login = function(objectUsername,objectPassword){
-    
-    var obj = new Object()
-    obj.username = objectUsername.value
-    obj.password= objectPassword.value
-    
-    posaljiPodatke(obj, function(err,data){
-
-        if(err != null){
-            window.alert(err)
-        }else{
-            json=JSON.parse(data)
-            //redirektujem se na stranicu predmeti.html
-            window.location.href=json.redirect_path
-        }
-    })
-}
-
-let logoutFunction = function(){
-    var ajax = new XMLHttpRequest()
-    ajax.onreadystatechange = function() {
-        if (ajax.readyState == 4 && ajax.status == 200){
-            json=JSON.parse(ajax.response)
-            //redirektujem se nazad na pocetnu stranicu prijava.html
-            window.location.href=json.redirect_path
-        }
-        else if(ajax.readyState == 4){
-            //desio se neki error
-            console.log(ajax.statusText)
-        }
     }
-    ajax.open("POST", "http://localhost:3000/logout", true)
-    ajax.send()
-}
+    function impl_postLogout(fnCallback){
+        let ajax = new XMLHttpRequest()
+
+        ajax.onreadystatechange = function() {
+            if (ajax.readyState == 4 && ajax.status == 200){
+                fnCallback(null,ajax.response)
+            }
+            else if(ajax.readyState == 4){
+                //desio se neki error
+                fnCallback(ajax.statusText,null)
+            }
+        }
+        ajax.open("POST", "http://localhost:3000/logout", true)
+        ajax.send()
+    }
+    //prisustvo ima oblik {sedmica:N,predavanja:P,vjezbe:V}
+    function impl_postPrisustvo(naziv,index,prisustvo,fnCallback){
+    }
+    return{
+    postLogin: impl_postLogin,
+    postLogout: impl_postLogout,
+    getPredmet: impl_getPredmet,
+    postPrisustvo: impl_postPrisustvo
+    };
+    })();

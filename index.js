@@ -38,7 +38,7 @@ app.get('/prijava.html',(req,res) => {
     res.sendFile(path.join(__dirname,'public','html','prijava.html'));
 })
 
-app.post('/login', (req, res) => { 
+app.post('/login', (req, res, next) => { 
     var jsonObj=req.body
     //provjera da li postoji taj korisnik
     fs.readFile(path.join(__dirname,'data','nastavnici.json'), (err, data) => {
@@ -51,8 +51,7 @@ app.post('/login', (req, res) => {
             //u sesiju upisujem username i listu predmeta na kojima je nastavnik
             req.session.username=currentNastavnik.nastavnik.username
             req.session.predmeti=currentNastavnik.predmeti
-
-            res.end(JSON.stringify({poruka: 'Uspješna prijava', redirect_path: "/predmeti.html"}))
+            res.end(JSON.stringify({poruka: 'Uspješna prijava' }))
         }else{
             res.end(JSON.stringify({poruka: 'Neuspješna prijava'}))
         }
@@ -62,12 +61,10 @@ app.post('/login', (req, res) => {
 app.post('/logout', (req,res) => {
     //brise podatke iz sesije
     if(req.session.username!=null){
-        console.log("Username prije brisanja: "+req.session.username)
-        console.log("Predmeti prije brisanja: "+req.session.predmeti)
         req.session.username=null
         req.session.predmeti=null
     }
-    res.end(JSON.stringify({poruka: 'Uspješan logout', redirect_path: "/prijava.html"}))
+    res.end(JSON.stringify({poruka: 'Uspješan logout'}))
 })
 
 app.use(express.static(path.join(__dirname, 'public')))
