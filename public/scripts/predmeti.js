@@ -1,7 +1,15 @@
 
- function buttonsControl(button) {
-    alert(button.innerHTML);
-   }
+function buttonsControl(button) {
+    alert(button.innerHTML)
+    PoziviAjax.getPredmet(button.innerHTML,function(err,data){
+
+        if(err != null){
+            window.alert(err)
+        }else{
+            console.log("USPJESAN RETURN IZ GetPredmet"+ data)
+        }
+    })
+}
 
 var predmeti1=document.getElementsByTagName("li")
 window.onload=function(){

@@ -4,6 +4,18 @@ const PoziviAjax = (()=>{
     // ako postoji greška poruka se prosljeđuje u error parametar callback-a, a data je tada null
     function impl_getPredmet(naziv,fnCallback){
         console.log("Usli smo u dobavljanje predmeta")
+
+        let ajax = new XMLHttpRequest()
+        ajax.open("GET", "http://localhost:3000/predmet/"+naziv, true)
+        ajax.setRequestHeader("Content-Type", "application/json")
+        ajax.send()
+
+        ajax.onreadystatechange = function () {
+            if (ajax.readyState == 4 && ajax.status == 200)
+               fnCallback(null, JSON.parse(ajax.responseText))
+            else if (ajax.readyState == 4 && ajax.status == 404)
+               fnCallback("error", null)
+        }
     }
     function impl_postLogin(username,password,fnCallback){
         var ajax = new XMLHttpRequest()

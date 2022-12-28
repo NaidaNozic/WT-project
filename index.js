@@ -40,13 +40,19 @@ app.get('/prijava.html',(req, res) => {
 })
 
 app.get('/predmet/:naziv', (req, res) => {
-    var jsonObj=JSON.parse(JSON.stringify(req.body))
-    console.log("USPJELO EHEHHE")
-    /*fs.readFile(path.join(__dirname,'data','prisustva.json'), (err, data) => {
+
+    fs.readFile(path.join(__dirname,'data','prisustva.json'), (err, data) => {
         if (err) throw err
+
         var prisustva = JSON.parse(data)
-        //prisustva.find(element => element.predmet==)
-    })*/
+        var currentPrisustvo=prisustva.find(element => element.predmet==req.params.naziv)
+
+        if(currentPrisustvo!=null){
+            res.json(JSON.stringify(currentPrisustvo))
+        }else{
+            res.json({poruka: 'Neuspješni pronalazak prisustva' })
+        }
+    })
 })
 
 app.post('/login', (req, res) => { 
