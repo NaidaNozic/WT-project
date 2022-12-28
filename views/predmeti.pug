@@ -1,5 +1,7 @@
 html
 head
+  link(rel='stylesheet' href='../css/prisustvo.css')
+  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css')
 body
     button#dugme Logout
     ul
@@ -7,9 +9,10 @@ body
             li(id= 'id' + i)
               a(href='#')= p
 
-    h1 Uspjesno ste se prijavili
+    #container
 
 script(src="../scripts/poziviAjax.js")
 script(src="../scripts/predmeti.js")
+script(src="../scripts/TabelaPrisustvo.js")
 
 </html>

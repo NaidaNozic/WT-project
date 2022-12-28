@@ -7,6 +7,9 @@ function buttonsControl(button) {
             window.alert(err)
         }else{
             console.log("USPJESAN RETURN IZ GetPredmet"+ data)
+            let div = document.getElementById("container")
+            let prisustvo = TabelaPrisustvo(div,JSON.parse(data))
+            prisustvo.iscrtajTabelu()
         }
     })
 }
