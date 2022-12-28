@@ -1,4 +1,10 @@
 
+ function buttonsControl(button) {
+    alert(button.innerHTML);
+   }
+
+var predmeti1=document.getElementsByTagName("li")
+window.onload=function(){
 var dugme=document.getElementById("dugme")
 
     dugme.onclick=function(){
@@ -12,3 +18,10 @@ var dugme=document.getElementById("dugme")
             }
         })
     }
+    
+for (let p of predmeti1) {
+    p.addEventListener("click", function(event){
+        buttonsControl(event.target);
+    },false);
+  }
+}

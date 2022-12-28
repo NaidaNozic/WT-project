@@ -32,7 +32,7 @@ app.get('/predmet.html', (req, res) => {
 });
 
 app.get('/predmeti.html', (req, res) => {
-    res.render("predmeti",{predmetiLista:req.session.predmeti});
+   res.render("predmeti",{predmetiLista:req.session.predmeti});
 });
 
 app.get('/prijava.html',(req, res) => {
@@ -59,13 +59,11 @@ app.post('/login', (req, res) => {
         var currentNastavnik=nastavnici.find(element => element.nastavnik.username == jsonObj.username 
                                                         && element.nastavnik.password_hash==jsonObj.password)                           
         if(currentNastavnik!=null){
-            //u sesiju upisujem username i listu predmeta na kojima je nastavnik
             req.session.username=currentNastavnik.nastavnik.username
             req.session.predmeti=currentNastavnik.predmeti
-            res.end(JSON.stringify({poruka: 'Uspješna prijava' }))
+            res.json({poruka: 'Uspješna prijava' })
         }else{
-            console.log("NIJE GA NASAO")
-            res.end(JSON.stringify({poruka: 'Neuspješna prijava'}))
+            res.json({poruka: 'Neuspješna prijava' })
         }
     })
 })  

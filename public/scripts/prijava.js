@@ -9,10 +9,8 @@ dugme.onclick = function(){
         if(err != null){
             window.alert(err)
         }else{
-            json=JSON.parse(data)
-            //redirektujem se na stranicu predmeti.html
             window.location.href="http://localhost:3000/predmeti.html"
-            //window.alert("USPJELOO")
+            //window.alert(JSON.parse(JSON.stringify(data)))
         }
     })
 }
