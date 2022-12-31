@@ -60,7 +60,6 @@ let TabelaPrisustvo = function(divDOMelement,data1){
 
             for(var j=0;j<ukupanBrSedmica;j++){
                 var sedmiceZaTrenutnogStudenta=data1.prisustva.filter(o => o.index==studenti[i].index)
-                //const newValues = values.flatMap((v) => [v *v, v*v*v, v+1]); 
                 var pom1=sedmiceZaTrenutnogStudenta.find(s => s.sedmica==j+1)
 
                 if(pom1==null){
@@ -119,17 +118,17 @@ let TabelaPrisustvo = function(divDOMelement,data1){
     }
 
     let dodajZelenuCeliju = function(red,vrijednost){
-        var celija=document.createElement("td")//.style.backgroundColor="lightgreen"
+        var celija=document.createElement("td")
         celija.textContent=vrijednost
-        celija.style.backgroundColor="lightgreen"
+        celija.className="zelena"
         red.appendChild(celija)
         return celija
     }
 
     let dodajCrvenuCeliju = function(red,vrijednost){
-        var celija=document.createElement("td")//.style.backgroundColor="#eb5050"
+        var celija=document.createElement("td")
         celija.textContent=vrijednost
-        celija.style.backgroundColor="#eb5050"
+        celija.className="crvena"
         red.appendChild(celija)
         return celija
     }
@@ -302,12 +301,17 @@ let TabelaPrisustvo = function(divDOMelement,data1){
                     var c1=tabela.rows[j].insertCell(k)
                     c1.colSpan=data1.brojPredavanjaSedmicno+data1.brojVjezbiSedmicno
                     c1.style.height="30px"
+                    c1.className="nemaPrisustva"
                     break
                 }
                 else{
                     if(pom1.predavanja>=k+1){
-                      tabela.rows[j].insertCell(k).style.backgroundColor="lightgreen"
-                    }else tabela.rows[j].insertCell(k).style.backgroundColor="#eb5050"
+                        var c=tabela.rows[j].insertCell(k)
+                        c.className="zelena"
+                    }else{
+                        var c=tabela.rows[j].insertCell(k)
+                        c.className="crvena"
+                    } 
                 }
             }
            }
@@ -324,12 +328,12 @@ let TabelaPrisustvo = function(divDOMelement,data1){
 
                 if(pom1.vjezbe>=k+1){
                     var celija=tabela.rows[j].insertCell(k+data1.brojPredavanjaSedmicno)
-                    celija.style.backgroundColor="lightgreen"  
+                    celija.className="zelena"
                     celija.style.height="30px"
                 } 
                 else{
                     var celija=tabela.rows[j].insertCell(k+data1.brojPredavanjaSedmicno)
-                    celija.style.backgroundColor="#eb5050"
+                    celija.className="crvena"
                     celija.style.height="30px"
                 }
 
@@ -337,11 +341,12 @@ let TabelaPrisustvo = function(divDOMelement,data1){
             }
            }
         }
-
+        postaviClickableListElements()
     }
     let dodajDugmadi=function(){
         var dugmeDesno=document.createElement("button")
         dugmeDesno.type="button"
+        dugmeDesno.id="dugmeDesno"
         dugmeDesno.ariaLabel="Btn1"
         dugmeDesno.innerHTML='<i class="fa-solid fa-arrow-right"></i>'
         dugmeDesno.addEventListener("click",sljedecaSedmica);
@@ -350,6 +355,7 @@ let TabelaPrisustvo = function(divDOMelement,data1){
 
         var dugmeLijevo=document.createElement("button")
         dugmeLijevo.type="button"
+        dugmeLijevo.id="dugmeLijevo"
         dugmeLijevo.ariaLabel="Btn2"
         dugmeLijevo.innerHTML='<i class="fa-solid fa-arrow-left"></i>'
         dugmeLijevo.addEventListener("click",prethodnaSedmica);
