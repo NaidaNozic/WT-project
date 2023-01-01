@@ -55,6 +55,40 @@ app.get('/predmet/:naziv', (req, res) => {
     })
 })
 
+app.post('/prisustvo/predmet/:naziv/student/:index' ,(req,res) => {
+    //unutar body-a se nalazi {sedmica:N,predavanja:P,vjezbe:V}
+    var jsonObj=JSON.parse(JSON.stringify(req.body))
+
+    fs.readFile(path.join(__dirname,'data','prisustva.json'), (error, data) => {
+        if (error) {
+        console.log("ERROR")
+        return;
+        }
+    
+    const jsonData = JSON.parse(data)
+    var index = jsonData.findIndex(function(item, i){
+        return item.predmet === req.params.naziv
+    })
+
+    var index1 = jsonData[index].prisustva.findIndex(function(item,i){
+        return item.sedmica==jsonObj.sedmica && item.index==req.params.index
+    })
+
+    jsonData[index].prisustva[index1].predavanja += jsonObj.predavanja
+    jsonData[index].prisustva[index1].vjezbe += jsonObj.vjezbe
+    
+    fs.writeFile(path.join(__dirname,'data','prisustva.json'), JSON.stringify(jsonData, null, 2), (err) => {
+        if (err) {
+            console.log("Neuspjesno unosenje prisustva")
+            return
+        }
+        console.log("Unos prisustva je uspjesan!")
+    })
+
+    })
+    //res.json(JSON.stringify(jsonData))
+})
+
 app.post('/login', (req, res) => { 
     var jsonObj=JSON.parse(JSON.stringify(req.body))
     //provjera da li postoji taj korisnik

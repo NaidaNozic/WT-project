@@ -3,12 +3,8 @@ const PoziviAjax = (()=>{
     // svaki callback kao parametre ima error i data, error je null ako je status 200 i data je tijelo odgovora
     // ako postoji greška poruka se prosljeđuje u error parametar callback-a, a data je tada null
     function impl_getPredmet(naziv,fnCallback){
-        console.log("Usli smo u dobavljanje predmeta")
 
         let ajax = new XMLHttpRequest()
-        ajax.open("GET", "http://localhost:3000/predmet/"+naziv, true)
-        ajax.setRequestHeader("Content-Type", "application/json")
-        ajax.send()
 
         ajax.onreadystatechange = function () {
             if (ajax.readyState == 4 && ajax.status == 200)
@@ -16,6 +12,10 @@ const PoziviAjax = (()=>{
             else if (ajax.readyState == 4 && ajax.status == 404)
                fnCallback("error", null)
         }
+
+        ajax.open("GET", "http://localhost:3000/predmet/"+naziv, true)
+        ajax.setRequestHeader("Content-Type", "application/json")
+        ajax.send()
     }
     function impl_postLogin(username,password,fnCallback){
         var ajax = new XMLHttpRequest()
@@ -53,8 +53,22 @@ const PoziviAjax = (()=>{
         ajax.open("POST", "http://localhost:3000/logout", true)
         ajax.send()
     }
-    //prisustvo ima oblik {sedmica:N,predavanja:P,vjezbe:V}
+
     function impl_postPrisustvo(naziv,index,prisustvo,fnCallback){
+
+        let ajax = new XMLHttpRequest()
+
+        ajax.onreadystatechange = function () {
+            if (ajax.readyState == 4 && ajax.status == 200)
+               fnCallback(null, JSON.parse(ajax.responseText))
+            else if (ajax.readyState == 4 && ajax.status == 404)
+               fnCallback("error", null)
+        }
+
+        ajax.open("POST", "http://localhost:3000/prisustvo/predmet/"+naziv+"/student/"+index, true)
+        ajax.setRequestHeader("Content-Type", "application/json")
+        forSend=JSON.stringify(prisustvo)
+        ajax.send(forSend)
     }
     return{
     postLogin: impl_postLogin,
