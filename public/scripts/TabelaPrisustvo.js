@@ -70,9 +70,12 @@ let TabelaPrisustvo = function(divDOMelement,data1){
                         for(var k=0;k<data1.brojVjezbiSedmicno;k++){
                             dodajCeliju(red,"V "+(k+1)).style.height="30px"
                         }
-                        var c=dodajCeliju(red1,"")
-                        c.colSpan=data1.brojPredavanjaSedmicno+data1.brojVjezbiSedmicno
-                        c.style.height="30px"
+
+                        for(let pak=1;pak<=data1.brojPredavanjaSedmicno+data1.brojVjezbiSedmicno;pak++){
+                            var c=dodajCeliju(red1,"")
+                            c.style.height="30px"
+                            c.className="nemaPrisustva"
+                        }
                     }
                 }else{
 
@@ -301,10 +304,11 @@ let TabelaPrisustvo = function(divDOMelement,data1){
                 pom1=pom2.find(o => o.sedmica==trenutnaSedmica)
 
                 if(pom1==null || (pom1!=null && pom1.length==0)){
-                    var c1=tabela.rows[j].insertCell(k)
-                    c1.colSpan=data1.brojPredavanjaSedmicno+data1.brojVjezbiSedmicno
-                    c1.style.height="30px"
-                    c1.className="nemaPrisustva"
+                    for(let pak=1;pak<=data1.brojPredavanjaSedmicno+data1.brojVjezbiSedmicno;pak++){
+                        var c1=tabela.rows[j].insertCell(k)
+                        c1.style.height="30px"
+                        c1.className="nemaPrisustva"
+                    }
                     break
                 }
                 else{

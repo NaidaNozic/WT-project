@@ -61,6 +61,32 @@ function ajaxPrisustvoPoziv(naziv,index,prisustvo1){
     })
 }
 
+function prazneClick(button){
+
+    var indexReda=button.parentNode.rowIndex 
+    var indexPredavanja=button.cellIndex
+    var predavanja1=0
+    var vjezbe1=0
+
+    var indexStudenta=currentPrisustvoData.studenti[indexReda/2-1].index
+    var nazivPredmeta=currentPrisustvoData.predmet
+
+    if(indexPredavanja+1<=currentPrisustvoData.brojPredavanjaSedmicno){
+        predavanja1=1
+        vjezbe1=0
+    }else{
+        vjezbe1=1
+        predavanja1=0
+    }
+
+    var prisustvo1 = {
+        "sedmica": trenutnaSedmica1,
+        "predavanja": predavanja1,
+        "vjezbe": vjezbe1
+    }
+    ajaxPrisustvoPoziv(nazivPredmeta,indexStudenta,prisustvo1)
+}
+
 function zeleneClick(button){
 
     var indexReda=button.parentNode.rowIndex //preko ovoga nalazim index studenta
@@ -94,6 +120,7 @@ function zeleneClick(button){
 function postaviClickableListElements(){
     var crvene=document.getElementsByClassName("crvena")
     var zelene=document.getElementsByClassName("zelena")
+    var prazne=document.getElementsByClassName("nemaPrisustva")
 
     for (let c of crvene) {
         c.addEventListener("click", function(event){
@@ -104,6 +131,12 @@ function postaviClickableListElements(){
     for (let c of zelene) {
         c.addEventListener("click", function(event){
             zeleneClick(event.target);
+        },false);
+    }
+
+    for (let c of prazne) {
+        c.addEventListener("click", function(event){
+            prazneClick(event.target);
         },false);
     }
 }

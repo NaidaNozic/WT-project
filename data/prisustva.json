@@ -147,7 +147,7 @@
     "prisustva": [
       {
         "sedmica": 1,
-        "predavanja": 2,
+        "predavanja": 1,
         "vjezbe": 2,
         "index": 12345
       },
@@ -160,7 +160,7 @@
       {
         "sedmica": 2,
         "predavanja": 1,
-        "vjezbe": 2,
+        "vjezbe": 0,
         "index": 12345
       },
       {
@@ -187,28 +187,28 @@
     ],
     "prisustva": [
       {
+        "sedmica": 2,
+        "predavanja": 3,
+        "vjezbe": 3,
+        "index": 12345
+      },
+      {
         "sedmica": 1,
-        "predavanja": 1,
-        "vjezbe": 0,
+        "predavanja": 3,
+        "vjezbe": 1,
         "index": 12345
       },
       {
         "sedmica": 1,
         "predavanja": 2,
+        "vjezbe": 1,
+        "index": "12346"
+      },
+      {
+        "sedmica": 2,
+        "predavanja": 3,
         "vjezbe": 2,
-        "index": 12346
-      },
-      {
-        "sedmica": 2,
-        "predavanja": 0,
-        "vjezbe": 0,
-        "index": 12345
-      },
-      {
-        "sedmica": 2,
-        "predavanja": 2,
-        "vjezbe": 0,
-        "index": 12346
+        "index": "12346"
       }
     ],
     "predmet": "Razvoj programskih rjesenja",

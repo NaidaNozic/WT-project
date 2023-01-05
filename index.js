@@ -57,7 +57,7 @@ app.get('/predmet/:naziv', (req, res) => {
 })
 
 app.post('/prisustvo/predmet/:naziv/student/:index' ,(req,res) => {
-    //unutar body-a se nalazi {sedmica:N,predavanja:P,vjezbe:V}
+    //inside the body we have {sedmica:N,predavanja:P,vjezbe:V}
     var jsonObj=JSON.parse(JSON.stringify(req.body))
 
     fs.readFile(path.join(__dirname,'data','prisustva.json'), (error, data) => {
@@ -75,9 +75,19 @@ app.post('/prisustvo/predmet/:naziv/student/:index' ,(req,res) => {
         return item.sedmica==jsonObj.sedmica && item.index==req.params.index
     })
 
-    jsonData[index].prisustva[index1].predavanja = jsonObj.predavanja
-    jsonData[index].prisustva[index1].vjezbe = jsonObj.vjezbe
-    
+    if(index1==-1){
+        var newWeek={
+            "sedmica": jsonObj.sedmica,
+            "predavanja": jsonObj.predavanja,
+            "vjezbe": jsonObj.vjezbe,
+            "index": req.params.index
+        }
+        jsonData[index].prisustva.push(newWeek)
+    }else{
+
+        jsonData[index].prisustva[index1].predavanja = jsonObj.predavanja
+        jsonData[index].prisustva[index1].vjezbe = jsonObj.vjezbe
+    }
     fs.writeFile(path.join(__dirname,'data','prisustva.json'), JSON.stringify(jsonData, null, 2), (err) => {
         if (err) {
             console.log("Neuspjesno unosenje prisustva")
@@ -85,9 +95,7 @@ app.post('/prisustvo/predmet/:naziv/student/:index' ,(req,res) => {
         }
         res.json(JSON.stringify(jsonData[index]))
     })
-
     })
-    //res.json(JSON.stringify(jsonData))
 })
 
 app.post('/login', (req, res) => { 
