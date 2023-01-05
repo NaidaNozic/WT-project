@@ -2,7 +2,7 @@
     {
     "nastavnik": {
     "username": "Naida",
-    "password_hash": "123"
+    "password_hash": "$2a$10$h8x1ClkmKuz6dHF1xKpbKOU2kLkIgT2WGtGjEs20b5EIaiJc7jqti"
     },
     "predmeti": [
     "Razvoj mobilnih aplikacija",
@@ -13,19 +13,10 @@
     {
     "nastavnik": {
     "username": "Adem",
-    "password_hash": "123"
+    "password_hash": "$2a$10$PkGKas/8ENNj9YTnOfJdIeWodl81ZxLT6LyYhiVSl5XhK1YxphI5e"
     },
     "predmeti": [
     "Web tehnologije"
-    ]
-    },
-    {
-    "nastavnik": {
-    "username": "Lajla",
-    "password_hash": "123"
-    },
-    "predmeti": [
-    "Razvoj programskih rjesenja"
     ]
     }
 ]

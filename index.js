@@ -1,7 +1,8 @@
-const express = require('express');
-const session = require("express-session");
-const bodyParser = require('body-parser');
-const fs = require('fs');
+const express = require('express')
+const bcrypt = require('bcrypt')
+const session = require("express-session")
+const bodyParser = require('body-parser')
+const fs = require('fs')
 const app = express()
 const path = require('path')
 app.use(bodyParser.json())
@@ -92,19 +93,33 @@ app.post('/prisustvo/predmet/:naziv/student/:index' ,(req,res) => {
 app.post('/login', (req, res) => { 
     var jsonObj=JSON.parse(JSON.stringify(req.body))
     //provjera da li postoji taj korisnik
-    fs.readFile(path.join(__dirname,'data','nastavnici.json'), (err, data) => {
+    fs.readFile(path.join(__dirname,'data','nastavnici.json'), async (err, data) => {
         if (err) throw err
         var nastavnici = JSON.parse(data)
+        let found=false
 
-        var currentNastavnik=nastavnici.find(element => element.nastavnik.username == jsonObj.username 
-                                                        && element.nastavnik.password_hash==jsonObj.password)                           
-        if(currentNastavnik!=null){
-            req.session.username=currentNastavnik.nastavnik.username
-            req.session.predmeti=currentNastavnik.predmeti
-            res.json({poruka: 'Uspješna prijava' })
-        }else{
-            res.json({poruka: 'Neuspješna prijava' })
-        }
+            nastavnici.some( function(element) {
+               
+                if(element.nastavnik.username == jsonObj.username){
+
+                    var isPasswordMatched = bcrypt.compareSync(
+                        jsonObj.password,
+                        element.nastavnik.password_hash
+                      )
+
+                    if(isPasswordMatched){
+                        req.session.username=element.nastavnik.username
+                        req.session.predmeti=element.predmeti
+                        found=true
+                        return true
+                    }
+                }
+            })
+            if(found){  
+                res.json({poruka: 'Uspješna prijava' })
+            }else {
+                res.json({poruka: 'Neuspješna prijava' })
+            }    
     })
 })  
 
