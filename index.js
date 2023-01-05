@@ -82,8 +82,6 @@ app.post('/prisustvo/predmet/:naziv/student/:index' ,(req,res) => {
             console.log("Neuspjesno unosenje prisustva")
             return
         }
-        console.log("Unos prisustva je uspjesan!")
-        //vracam prisustvo za trenutni predmet
         res.json(JSON.stringify(jsonData[index]))
     })
 

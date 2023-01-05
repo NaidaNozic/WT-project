@@ -7,7 +7,7 @@
     "predmeti": [
     "Razvoj mobilnih aplikacija",
     "Osnove informacionih istrazivanja",
-    "PREDMET3"
+    "Razvoj programskih rjesenja"
     ]
     },
     {
@@ -17,6 +17,15 @@
     },
     "predmeti": [
     "Web tehnologije"
+    ]
+    },
+    {
+    "nastavnik": {
+    "username": "Lajla",
+    "password_hash": "123"
+    },
+    "predmeti": [
+    "Razvoj programskih rjesenja"
     ]
     }
 ]
