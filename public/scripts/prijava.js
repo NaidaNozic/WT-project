@@ -9,8 +9,13 @@ dugme.onclick = function(){
         if(err != null){
             window.alert(err)
         }else{
-            window.location.href="http://localhost:3000/predmeti.html"
-            //window.alert(JSON.parse(JSON.stringify(data)))
+            var message=JSON.parse(data)
+            if(message.poruka=="Neuspješna prijava"){
+                var divElement=document.getElementById("areaBelow")
+                divElement.innerHTML="<h2>Neispravni podaci</h2>"
+            }else{
+                window.location.href="http://localhost:3000/predmeti.html"
+            }
         }
     })
 }
