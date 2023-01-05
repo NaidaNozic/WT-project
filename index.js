@@ -75,8 +75,8 @@ app.post('/prisustvo/predmet/:naziv/student/:index' ,(req,res) => {
         return item.sedmica==jsonObj.sedmica && item.index==req.params.index
     })
 
-    jsonData[index].prisustva[index1].predavanja += jsonObj.predavanja
-    jsonData[index].prisustva[index1].vjezbe += jsonObj.vjezbe
+    jsonData[index].prisustva[index1].predavanja = jsonObj.predavanja
+    jsonData[index].prisustva[index1].vjezbe = jsonObj.vjezbe
     
     fs.writeFile(path.join(__dirname,'data','prisustva.json'), JSON.stringify(jsonData, null, 2), (err) => {
         if (err) {

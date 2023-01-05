@@ -23,10 +23,16 @@ function crveneClick(button){
     var indexStudenta=currentPrisustvoData.studenti[indexReda/2-1].index
     var nazivPredmeta=currentPrisustvoData.predmet
 
+    var index1 = currentPrisustvoData.prisustva.findIndex(function(item,i){
+        return item.sedmica==trenutnaSedmica1 && item.index==indexStudenta
+    })
+
     if(indexPredavanja+1<=currentPrisustvoData.brojPredavanjaSedmicno){
-        predavanja1=+1
+        predavanja1=currentPrisustvoData.prisustva[index1].predavanja+1
+        vjezbe1=currentPrisustvoData.prisustva[index1].vjezbe
     }else{
-        vjezbe1=+1
+        vjezbe1=currentPrisustvoData.prisustva[index1].vjezbe+1
+        predavanja1=currentPrisustvoData.prisustva[index1].predavanja
     }
     //azurirano prisustvo:
     var prisustvo1 = {
@@ -65,10 +71,16 @@ function zeleneClick(button){
     var indexStudenta=currentPrisustvoData.studenti[indexReda/2-1].index
     var nazivPredmeta=currentPrisustvoData.predmet
 
+    var index1 = currentPrisustvoData.prisustva.findIndex(function(item,i){
+        return item.sedmica==trenutnaSedmica1 && item.index==indexStudenta
+    })
+
     if(indexPredavanja+1<=currentPrisustvoData.brojPredavanjaSedmicno){
-        predavanja1=-1
+        predavanja1=currentPrisustvoData.prisustva[index1].predavanja-1
+        vjezbe1=currentPrisustvoData.prisustva[index1].vjezbe
     }else{
-        vjezbe1=-1
+        vjezbe1=currentPrisustvoData.prisustva[index1].vjezbe-1
+        predavanja1=currentPrisustvoData.prisustva[index1].predavanja
     }
     //azurirano prisustvo:
     var prisustvo1 = {
