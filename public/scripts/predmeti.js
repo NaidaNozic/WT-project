@@ -1,6 +1,6 @@
 var currentPrisustvoData=""
 var trenutnaSedmica1=-1
-var prisustvo//= TabelaPrisustvo(div,JSON.parse(data))
+var prisustvo
 
 function postaviPrisustvoGlobal(tabela){
     prisustvo = tabela
@@ -12,47 +12,50 @@ function postaviTrenutnoPrisustvoPredmeta(data){
 function postaviTrenutnuSedmicu(sedmica){
     trenutnaSedmica1=sedmica
 }
-/*
-function azurirajData(){
-    naziv=currentPrisustvoData.predmet
-    PoziviAjax.getPredmet(naziv,function(err,data){
-        
-        if(err != null){
-            window.alert(err)
-        }else{
-            currentPrisustvoData=JSON.parse(data)
-            console.log("NOVOO U predmeti.js")
-            console.log(currentPrisustvoData)
-            //postaviTrenutnoPrisustvoPredmeta(JSON.parse(data))
-            prisustvo.postaviData(data)
-        }
-    })
-    return currentPrisustvoData
-}*/
 
 function crveneClick(button){
-    button.style.backgroundColor="lightgreen"
-    button.className="zelena"
-    button.addEventListener("click", function(event){ zeleneClick(event.target); },false)
+
+    var indexReda=button.parentNode.rowIndex //preko ovoga nalazim index studenta
+    var indexPredavanja=button.cellIndex //preko ovoga znam dodajem li prisustvo predavanjima ili vjezbama
+    var predavanja1=0
+    var vjezbe1=0
+
+    var indexStudenta=currentPrisustvoData.studenti[indexReda/2-1].index
+    var nazivPredmeta=currentPrisustvoData.predmet
+
+    if(indexPredavanja+1<=currentPrisustvoData.brojPredavanjaSedmicno){
+        predavanja1=+1
+    }else{
+        vjezbe1=+1
+    }
+    //azurirano prisustvo:
+    var prisustvo1 = {
+        "sedmica": trenutnaSedmica1,
+        "predavanja": predavanja1,
+        "vjezbe": vjezbe1
+    }
+    ajaxPrisustvoPoziv(nazivPredmeta,indexStudenta,prisustvo1)
 }
 
-function ajaxPrisustvoPoziv(naziv,index,prisustvo){
+function ajaxPrisustvoPoziv(naziv,index,prisustvo1){
 
-    PoziviAjax.postPrisustvo(naziv,index,prisustvo,function(err,data){
+    PoziviAjax.postPrisustvo(naziv,index,prisustvo1,function(err,data){
 
         if(err != null){
             window.alert(err)
         }else{
-            prisustvo.postaviData(data)
+            let div = document.getElementById("container")
+            postaviPrisustvoGlobal(TabelaPrisustvo(div,JSON.parse(data)))
+            postaviTrenutnoPrisustvoPredmeta(JSON.parse(data))
+            postaviTrenutnuSedmicu(prisustvo.trenutnaSedmica)
+            prisustvo.iscrtajTabelu()
+            postaviClickableListElements()
         }
 
     })
 }
 
 function zeleneClick(button){
-    button.style.backgroundColor="#eb5050"
-    button.className="crvena"
-    button.addEventListener("click", function(event){ crveneClick(event.target) },false)
 
     var indexReda=button.parentNode.rowIndex //preko ovoga nalazim index studenta
     var indexPredavanja=button.cellIndex //preko ovoga znam dodajem li prisustvo predavanjima ili vjezbama
@@ -68,12 +71,12 @@ function zeleneClick(button){
         vjezbe1=-1
     }
     //azurirano prisustvo:
-    var prisustvo = {
+    var prisustvo1 = {
         "sedmica": trenutnaSedmica1,
         "predavanja": predavanja1,
         "vjezbe": vjezbe1
     }
-    ajaxPrisustvoPoziv(nazivPredmeta,indexStudenta,prisustvo)
+    ajaxPrisustvoPoziv(nazivPredmeta,indexStudenta,prisustvo1)
 }
 
 function postaviClickableListElements(){
@@ -101,7 +104,6 @@ function buttonsControl(button) {
         }else{
             let div = document.getElementById("container")
             postaviPrisustvoGlobal(TabelaPrisustvo(div,JSON.parse(data)))
-            //let prisustvo = TabelaPrisustvo(div,JSON.parse(data))
             postaviTrenutnoPrisustvoPredmeta(JSON.parse(data))
             postaviTrenutnuSedmicu(prisustvo.trenutnaSedmica)
             prisustvo.iscrtajTabelu()

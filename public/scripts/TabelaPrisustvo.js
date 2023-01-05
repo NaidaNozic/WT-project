@@ -1,10 +1,8 @@
 
 
-let TabelaPrisustvo = function(divDOMelement,podaci){ 
+let TabelaPrisustvo = function(divDOMelement,data1){ 
 
-    let data1=podaci
     let iscrtajTabelu = function(){
-        data1=podaci
         divDOMelement.innerHTML=""
         divDOMelement.style.display = "block"
 
@@ -184,7 +182,7 @@ let TabelaPrisustvo = function(divDOMelement,podaci){
     let tabela;
 
     let sljedecaSedmica = function () {
-        data1=podaci
+
         var k=trenutnaSedmica
         if(k==Math.max.apply(Math,data1.prisustva.map(o => o.sedmica)))return 
         var table = tabela;
@@ -232,8 +230,6 @@ let TabelaPrisustvo = function(divDOMelement,podaci){
     }
 
     let prethodnaSedmica = function () {
-        
-        data1=podaci
 
         var k=trenutnaSedmica
         if(k==1)return
@@ -283,7 +279,6 @@ let TabelaPrisustvo = function(divDOMelement,podaci){
 
     let prikaziDetaljeSedmice=function(){
         
-        data1=podaci
         tabela.rows[0].cells[1+trenutnaSedmica].colSpan=data1.brojPredavanjaSedmicno+data1.brojVjezbiSedmicno
         var brojStudenata=0
         var pom1
@@ -370,9 +365,7 @@ let TabelaPrisustvo = function(divDOMelement,podaci){
         dugmeLijevo.style="height:40px; width:50px;font-size:20px;margin:5px"
         divDOMelement.appendChild(dugmeLijevo)
     }
-
     return{
-        data1:data1,
         iscrtajTabelu: iscrtajTabelu,
         trenutnaSedmica: trenutnaSedmica,
         tabela: tabela,
