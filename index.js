@@ -136,8 +136,10 @@ app.post('/logout', (req,res) => {
     if(req.session.username!=null){
         req.session.username=null
         req.session.predmeti=null
+        res.end(JSON.stringify({poruka: 'Uspješan logout'}))
+    }else{
+        res.end(JSON.stringify({poruka: 'Neuspješan logout'}))
     }
-    res.end(JSON.stringify({poruka: 'Uspješan logout'}))
 })
 
 app.use(express.static(path.join(__dirname, 'public')))
