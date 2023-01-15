@@ -1,0 +1,18 @@
+ul{
+    width:fit-content;
+    margin: 0 auto;
+}
+#dugmeDiv{
+    display: flex; 
+    justify-content: center;
+    margin: 15px;
+}
+#dugme{
+    font-size: medium;
+    padding: 5px 15px 5px 15px;
+    border-radius: 8px;
+    background-color: #C576F6;
+}
+li{
+    font-size: large;
+}
