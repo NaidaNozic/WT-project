@@ -1,0 +1,32 @@
+body{
+    padding-top: 15px;
+}
+form{
+    width: fit-content;
+    margin: 0 auto;
+    padding: 45px 5px 5px 5px;
+}
+#formaDugme{
+    width: fit-content;
+    margin: 0 auto;
+    padding: 10px;
+    border: 1px solid black;
+    box-shadow: 4px 5px 10px 2px rgba(0,0,0,.3);
+}
+#areaBelow{
+    margin: 0 auto;
+    width: fit-content;
+}
+label{
+    font-size: large;
+}
+input{
+    padding: 4px;
+}
+#dugme{
+    margin-left: 40%;
+    padding: 5px 15px 5px 15px;
+    background-color: #C576F6;
+    border-radius: 8px;
+    font-size: large;
+}
