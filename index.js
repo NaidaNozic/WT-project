@@ -25,12 +25,12 @@ db.sequelize.authenticate().then(()=>{
 }).catch((err)=>{
     console.log("Error connecting to the database!")
 })
-
+/*
 db.sequelize.sync({alter:true}).then((data)=>{
     console.log("Sync successful!")
 }).catch((err)=>{
     console.log("Sync error!")
-})
+})*/
 
 //_dirname allows us to get the root directory of our project
 //u slucaju da ne moze naci neki file, onda ubacuje "/css, /html, /scripts" u put putanje
@@ -58,14 +58,34 @@ app.get('/prijava.html',(req, res) => {
 
 app.get('/predmet/:naziv', (req, res) => {
 
-    fs.readFile(path.join(__dirname,'data','prisustva.json'), (err, data) => {
-        if (err) throw err
-
-        var prisustva = JSON.parse(data)
-        var currentPrisustvo=prisustva.find(element => element.predmet==req.params.naziv)
-
-        if(currentPrisustvo!=null){
-            res.json(JSON.stringify(currentPrisustvo))
+    db.predmet.findOne({where:{naziv: req.params.naziv}}).then(function(course){
+        if(course){
+            db.prisustvo.findAll({where:{PredmetId: course.id}}).then(function(prisustvo1){
+                var prisustva=prisustvo1.map(o=>o.toJSON())
+                
+                db.Student_Predmet.findAll({where:{PredmetId:course.id}}).then(async function(studenti){
+                    if(studenti){
+                        var listaStudenata=[]
+                        for(let i=0;i<studenti.length;i++){
+                           const s = await db.student.findOne({where:{id:studenti[i].StudentId}})
+                           if(s){
+                            listaStudenata.push(s)
+                           }
+                        }
+                        var s1=listaStudenata.map(o=>o.toJSON())
+                        var objekat={
+                            "studenti":s1,
+                            "prisustva":prisustva,
+                            "predmet":req.params.naziv,
+                            "brojPredavanjaSedmicno":course.brojPredavanjaSedmicno,
+                            "brojVjezbiSedmicno":course.brojVjezbiSedmicno
+                        }
+                        res.json(JSON.stringify(objekat))
+                    }else{
+                        res.json({poruka: 'Neuspješni pronalazak prisustva' })
+                    }
+                }).catch((err)=>{res.json({poruka: 'Neuspješni pronalazak prisustva' })})
+            }).catch((err)=>{res.json({poruka: 'Neuspješni pronalazak prisustva' })})
         }else{
             res.json({poruka: 'Neuspješni pronalazak prisustva' })
         }
