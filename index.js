@@ -96,41 +96,59 @@ app.post('/prisustvo/predmet/:naziv/student/:index' ,(req,res) => {
     //inside the body we have {sedmica:N,predavanja:P,vjezbe:V}
     var jsonObj=JSON.parse(JSON.stringify(req.body))
 
-    fs.readFile(path.join(__dirname,'data','prisustva.json'), (error, data) => {
-        if (error) {
-        console.log("ERROR")
-        return;
-        }
-    
-    const jsonData = JSON.parse(data)
-    var index = jsonData.findIndex(function(item, i){
-        return item.predmet === req.params.naziv
-    })
 
-    var index1 = jsonData[index].prisustva.findIndex(function(item,i){
-        return item.sedmica==jsonObj.sedmica && item.index==req.params.index
-    })
+    db.predmet.findOne({where: {naziv: req.params.naziv}}).then(function(foundPredmet){
 
-    if(index1==-1){
-        var newWeek={
-            "sedmica": jsonObj.sedmica,
-            "predavanja": jsonObj.predavanja,
-            "vjezbe": jsonObj.vjezbe,
-            "index": req.params.index
-        }
-        jsonData[index].prisustva.push(newWeek)
-    }else{
+                db.prisustvo.update({predavanja: jsonObj.predavanja, vjezbe: jsonObj.vjezbe},
+                                    {where: {sedmica: jsonObj.sedmica,
+                                             index: req.params.index, 
+                                             PredmetId: foundPredmet.id}}).then(async function(success){
+                    if(success[0]==0){
+                        db.prisustvo.create(
+                            {
+                                sedmica: jsonObj.sedmica,
+                                predavanja: jsonObj.predavanja,
+                                vjezbe: jsonObj.vjezbe,
+                                index: req.params.index,
+                                PredmetId: foundPredmet.id
+                            }
+                        )
+                    }
+                    db.Student_Predmet.findAll({where:{PredmetId:foundPredmet.id}}).then(async function(studenti){
+                        if(studenti){
+                            var listaStudenata=[]
+                            for(let i=0;i<studenti.length;i++){
+                               const s = await db.student.findOne({where:{id:studenti[i].StudentId}})
+                               if(s){
+                                listaStudenata.push(s)
+                               }
+                            }
 
-        jsonData[index].prisustva[index1].predavanja = jsonObj.predavanja
-        jsonData[index].prisustva[index1].vjezbe = jsonObj.vjezbe
-    }
-    fs.writeFile(path.join(__dirname,'data','prisustva.json'), JSON.stringify(jsonData, null, 2), (err) => {
-        if (err) {
-            console.log("Neuspjesno unosenje prisustva")
-            return
-        }
-        res.json(JSON.stringify(jsonData[index]))
-    })
+                            var s1=listaStudenata.map(o=>o.toJSON())
+                            var newPrisustva = await db.prisustvo.findAll({where: {PredmetId: foundPredmet.id}})
+                            var pp=newPrisustva.map(o=>o.toJSON())
+                            var objekat={
+                                "studenti": s1,
+                                "prisustva": pp,
+                                "predmet": req.params.naziv,
+                                "brojPredavanjaSedmicno": foundPredmet.brojPredavanjaSedmicno,
+                                "brojVjezbiSedmicno": foundPredmet.brojVjezbiSedmicno
+                            }
+                            res.json(JSON.stringify(objekat))
+                        }
+                    }).catch((err)=>{
+                        console.log("Error pri unosu prisustva!")
+                        res.json({poruka: 'Neuspješni unos prisustva' })
+                    })
+
+                }).catch((err)=>{
+                    console.log("Error pri unosu prisustva!")
+                    res.json({poruka: 'Neuspješni unos prisustva' })
+                })
+
+    }).catch((err)=>{
+        console.log("Neuspjesno unosenje prisustva")
+        res.json({poruka: 'Neuspješni unos prisustva' })
     })
 })
 
