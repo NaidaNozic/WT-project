@@ -116,35 +116,37 @@ app.post('/prisustvo/predmet/:naziv/student/:index' ,(req,res) => {
 
 app.post('/login', (req, res) => { 
     var jsonObj=JSON.parse(JSON.stringify(req.body))
-    //provjera da li postoji taj korisnik
-    fs.readFile(path.join(__dirname,'data','nastavnici.json'), async (err, data) => {
-        if (err) throw err
-        var nastavnici = JSON.parse(data)
-        let found=false
-
-            nastavnici.some( function(element) {
-               
-                if(element.nastavnik.username == jsonObj.username){
-
-                    var isPasswordMatched = bcrypt.compareSync(
-                        jsonObj.password,
-                        element.nastavnik.password_hash
-                      )
-
-                    if(isPasswordMatched){
-                        req.session.username=element.nastavnik.username
-                        req.session.predmeti=element.predmeti
-                        found=true
-                        return true
-                    }
+    db.nastavnik.findAll({where: {username : jsonObj.username}}).then(async function(nastavnici){
+        if(nastavnici.length>0){
+            let found=false
+            for(let i=0;i<nastavnici.length;i++){
+                
+                var isPasswordMatched = bcrypt.compareSync(
+                    jsonObj.password,
+                    nastavnici[i].password_hash
+                  )
+                if(isPasswordMatched){
+                    await db.predmet.findAll({where: {NastavnikId: nastavnici[i].id}}).then(function(courses){
+                        if(courses){
+                            found=true
+                            req.session.predmeti=courses.map(o=>o.naziv)
+                        }
+                    })
                 }
-            })
-            if(found){  
+
+            }
+            if(found){
                 res.json({poruka: 'Uspješna prijava' })
-            }else {
+                return
+            }else{
                 res.json({poruka: 'Neuspješna prijava' })
-            }    
-    })
+                return
+            }
+        }else{
+            res.json({poruka: 'Neuspješna prijava' })
+            return
+        }
+    }).catch((err)=>{console.log("Nesto se desilo kod login-a")})
 })  
 
 app.post('/logout', (req,res) => {
