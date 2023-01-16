@@ -1,3 +1,6 @@
+const db = require('./baza.js');
+const student = require("./models/student")
+
 const express = require('express')
 const bcrypt = require('bcrypt')
 const session = require("express-session")
@@ -8,13 +11,26 @@ const path = require('path')
 app.use(bodyParser.json())
 
 app.set("view engine", "pug");
-app.set("views", path.join(__dirname, "views"))
+app.set("views", path.join(__dirname, "/public/views"))
 
 app.use(session({
     secret: 'neka tajna sifra',
     resave: true,
     saveUninitialized: true
     }))
+
+/*BAZA KOMANDE*/
+db.sequelize.authenticate().then(()=>{
+    console.log("Successful connection!")
+}).catch((err)=>{
+    console.log("Error connecting to the database!")
+})
+
+db.sequelize.sync({alter:true}).then((data)=>{
+    console.log("Sync successful!")
+}).catch((err)=>{
+    console.log("Sync error!")
+})
 
 //_dirname allows us to get the root directory of our project
 //u slucaju da ne moze naci neki file, onda ubacuje "/css, /html, /scripts" u put putanje
@@ -148,6 +164,8 @@ app.use('/html', express.static(path.join(__dirname)))
 app.use('/scripts', express.static(path.join(__dirname)))
 app.use('/img', express.static(path.join(__dirname)))
 
-app.listen(3000, ()=> {
+let exportt=app.listen(3000, ()=> {
     console.log("Server is running at port 3000...")
 });
+
+module.exports = exportt
