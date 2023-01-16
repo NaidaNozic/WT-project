@@ -49,7 +49,11 @@ app.get('/predmet.html', (req, res) => {
 });
 
 app.get('/predmeti.html', (req, res) => {
-   res.render("predmeti",{predmetiLista:req.session.predmeti});
+    if(req.session.predmeti==null){
+        res.json({greska:'Nastavnik nije loginovan'})
+    }else{
+        res.render("predmeti",{predmetiLista:req.session.predmeti})
+    }
 });
 
 app.get('/prijava.html',(req, res) => {
