@@ -1,5 +1,13 @@
 const db = require('./baza.js')
 
+db.sequelize.sync({force:true}).then(async (data)=>{
+    console.log("Sync successful!")
+    await addTestData()
+    process.exit()
+}).catch((err)=>{
+    console.log("Sync error!")
+})
+
 const addTestData = async function(){
     await db.student.bulkCreate([
         {
@@ -148,8 +156,8 @@ const addTestData = async function(){
             id: 13,
             sedmica: 2,
             predavanja: 1,
-            jezbe: 0,
-            index: 12345,
+            vjezbe: 0,
+            index: 12346,
             PredmetId: 2
           },
           //treci predmet
@@ -236,4 +244,3 @@ const addTestData = async function(){
     ])
 }
 
-module.exports=addTestData

@@ -1,5 +1,4 @@
 const db = require('./baza.js')
-const addTestData = require('./testData.js')
 
 const express = require('express')
 const bcrypt = require('bcrypt')
@@ -26,12 +25,12 @@ db.sequelize.authenticate().then(()=>{
     console.log("Error connecting to the database!")
 })
 
-db.sequelize.sync({force:true}).then((data)=>{
+/*db.sequelize.sync({force:true}).then((data)=>{
     console.log("Sync successful!")
     addTestData()
 }).catch((err)=>{
     console.log("Sync error!")
-})
+})*/
 
 //_dirname allows us to get the root directory of our project
 //u slucaju da ne moze naci neki file, onda ubacuje "/css, /html, /scripts" u put putanje
