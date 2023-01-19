@@ -8,7 +8,7 @@ const path = require('path')
 app.use(bodyParser.json())
 
 app.set("view engine", "pug");
-app.set("views", path.join(__dirname, "views"))
+app.set("views", path.join(__dirname, "/public/views"))
 
 app.use(session({
     secret: 'neka tajna sifra',
@@ -33,7 +33,11 @@ app.get('/predmet.html', (req, res) => {
 });
 
 app.get('/predmeti.html', (req, res) => {
-   res.render("predmeti",{predmetiLista:req.session.predmeti});
+    if(req.session.predmeti==null){
+        res.json({greska:'Nastavnik nije loginovan'})
+    }else{
+        res.render("predmeti",{predmetiLista:req.session.predmeti})
+    }
 });
 
 app.get('/prijava.html',(req, res) => {
