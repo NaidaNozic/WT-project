@@ -54,6 +54,7 @@ app.get('/predmet/:naziv', (req, res) => {
 
         if(currentPrisustvo!=null){
             res.json(JSON.stringify(currentPrisustvo))
+            //res.json(JSON.parse(currentPrisustvo))
         }else{
             res.json({poruka: 'Neuspješni pronalazak prisustva' })
         }
