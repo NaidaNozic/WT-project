@@ -18,5 +18,14 @@ Create a database with the following parametres:
 
 Before running the application, first run <b>"node priprema.js"</b> and then <b>"node index.js"</b>.
 
+<h3>System functionalities:</h3>
 
+1. Log in
+<img src="Videos/login.png">
+
+2. After successful log in
+<img src="Videos/afterLogin.png">
+
+3. Attendance entry
+<img src="Videos/Entry.gif">
 
